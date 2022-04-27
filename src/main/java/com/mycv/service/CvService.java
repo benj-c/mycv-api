@@ -13,6 +13,7 @@ import com.mycv.util.ApiUtil;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -35,6 +36,7 @@ public class CvService {
     /**
      * @param newCv
      */
+    @Transactional
     public void createNewCv(NewCv newCv) {
         String authUser = ApiUtil.getAuthUserName();
         log.info("getting user by authenticated username");
@@ -146,6 +148,7 @@ public class CvService {
      * deletes a cv
      * @param cvId
      */
+    @Transactional
     public void permaDeleteCv(int cvId) {
         String authUser = ApiUtil.getAuthUserName();
         log.info("getting CV by username:{}, cvId:{}", authUser, cvId);
