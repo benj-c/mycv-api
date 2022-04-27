@@ -4,7 +4,6 @@ import com.mycv.exception.ResponseType;
 import com.mycv.model.CvData;
 import com.mycv.model.Response;
 import com.mycv.model.UserRoles;
-import com.mycv.model.entity.CvEntity;
 import com.mycv.model.request.NewCv;
 import com.mycv.service.CvService;
 import lombok.extern.slf4j.Slf4j;
@@ -104,6 +103,33 @@ public class CvController {
             return ResponseEntity.ok(response);
         } finally {
             log.info("Completed|retrieveCv|ProcessingTime:{}ms", System.currentTimeMillis() - startTime);
+        }
+    }
+
+    /**
+     * deletes CV object of given cv id
+     * @param cvId
+     * @return
+     */
+    @DeleteMapping(
+            path = "/cv/{cvId}",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @RolesAllowed({UserRoles.JOB_SEEKER, UserRoles.AGENT, UserRoles.ADMIN})
+    public ResponseEntity<Response> deleteCv(
+            @PathVariable int cvId
+    ) {
+        long startTime = System.currentTimeMillis();
+        log.info("Initiating|deleteCv");
+        log.info("PathVars|{}", cvId);
+        try {
+            this.cvService.permaDeleteCv(cvId);
+            Response response = Response.success("CV has successfully deleted")
+                    .build(ResponseType.OPERATION_SUCCESS);
+            log.info("Res|{}", response.toString());
+            return ResponseEntity.ok(response);
+        } finally {
+            log.info("Completed|deleteCv|ProcessingTime:{}ms", System.currentTimeMillis() - startTime);
         }
     }
 }

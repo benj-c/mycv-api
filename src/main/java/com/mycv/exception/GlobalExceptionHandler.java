@@ -40,12 +40,24 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
+    /**
+     * handle ApiException
+     * @param ex
+     * @return
+     */
     @ExceptionHandler(value = ApiException.class)
     public ResponseEntity<?> handleApiException(ApiException ex) {
+        log.error("ApiException:{}", ex.getMsg());
         Response response = Response.error(ex.getMsg()).build(ex.getResponseType());
+        log.info("Res|{}", response.toString());
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
+    /**
+     *
+     * @param ex
+     * @return
+     */
     @ExceptionHandler(value = BadCredentialsException.class)
     public ResponseEntity<Response> handleBadCredentialsException(BadCredentialsException ex) {
         log.error("BadCredentialsException", ex);
@@ -54,6 +66,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
+    /**
+     *
+     * @param ex
+     * @return
+     */
     @ExceptionHandler(value = AccessDeniedException.class)
     public ResponseEntity<?> handleAccessDeniedException(AccessDeniedException ex) {
         log.error("AccessDeniedException", ex);
@@ -62,6 +79,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
+    /**
+     *
+     * @param ex
+     * @return
+     */
     @ExceptionHandler(value = DisabledException.class)
     public ResponseEntity<?> handleDisabledException(DisabledException ex) {
         log.error("DisabledException", ex);
@@ -70,6 +92,11 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(response.getStatus()).body(response);
     }
 
+    /**
+     *
+     * @param ex
+     * @return
+     */
     @ExceptionHandler(value = Exception.class)
     public ResponseEntity<?> handleException(Exception ex) {
         log.error("InternalError", ex);

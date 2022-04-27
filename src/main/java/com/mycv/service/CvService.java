@@ -141,4 +141,18 @@ public class CvService {
                 .workExperiences(workExperiences)
                 .build();
     }
+
+    /**
+     * deletes a cv
+     * @param cvId
+     */
+    public void permaDeleteCv(int cvId) {
+        String authUser = ApiUtil.getAuthUserName();
+        log.info("getting CV by username:{}, cvId:{}", authUser, cvId);
+        CvEntity cvEntity = getCvRepository().findByUserNameAndCvId(authUser, cvId).orElseThrow(() ->
+                new ApiException(ResponseType.CV_NOT_FOUND, "CV not found for id: " + cvId)
+        );
+        log.info("deleting cv|cvId:{}", cvEntity.getId());
+        getCvRepository().deleteById(cvEntity.getId());
+    }
 }
