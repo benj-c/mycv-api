@@ -2,6 +2,7 @@ package com.mycv.model.entity;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
@@ -19,7 +20,7 @@ public class EducationHistoryEntity {
     private String location;
 
     @Column(name = "awarded_date", nullable = false)
-    private Date awardedDate;
+    private LocalDate awardedDate;
 
     @ManyToOne
     @JoinColumn(name = "education_study_field_id", referencedColumnName = "id")
@@ -53,11 +54,11 @@ public class EducationHistoryEntity {
         this.location = location;
     }
 
-    public Date getAwardedDate() {
+    public LocalDate getAwardedDate() {
         return awardedDate;
     }
 
-    public void setAwardedDate(Date awardedDate) {
+    public void setAwardedDate(LocalDate awardedDate) {
         this.awardedDate = awardedDate;
     }
 

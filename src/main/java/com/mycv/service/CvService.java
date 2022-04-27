@@ -2,6 +2,7 @@ package com.mycv.service;
 
 import com.mycv.exception.ApiException;
 import com.mycv.exception.ResponseType;
+import com.mycv.model.CvData;
 import com.mycv.model.entity.CvEntity;
 import com.mycv.model.entity.CvJobFieldEntity;
 import com.mycv.model.entity.UserEntity;
@@ -14,6 +15,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Getter
@@ -29,7 +33,6 @@ public class CvService {
     }
 
     /**
-     *
      * @param newCv
      */
     public void createNewCv(NewCv newCv) {
@@ -60,12 +63,82 @@ public class CvService {
         getCvRepository().save(cvEntity);
     }
 
-    public CvEntity findCv(int cvId) {
+    public CvData findCv(int cvId) {
         String authUser = ApiUtil.getAuthUserName();
         log.info("getting CV by username:{}, cvId:{}", authUser, cvId);
         CvEntity cvEntity = getCvRepository().findByUserNameAndCvId(authUser, cvId).orElseThrow(() ->
                 new ApiException(ResponseType.CV_NOT_FOUND, "CV not found for id: " + cvId)
         );
-        return cvEntity;
+        CvJobFieldEntity cvJobFieldEntity = cvEntity.getCvJobFieldByJobFieldId();
+        CvData.CvJobField cvJobField = new CvData.CvJobField(cvJobFieldEntity.getId(), cvJobFieldEntity.getField());
+
+        //set edu history list
+        List<CvData.EduQualification> eduQualifications = cvEntity.getEducationHistoriesById().stream()
+                .map(e -> {
+                    return CvData.EduQualification.builder()
+                            .awardedDate(e.getAwardedDate())
+                            .instituitionName(e.getInstituitionName())
+                            .location(e.getLocation())
+                            .id(e.getId())
+                            .eduField(new CvData.EduQualification.EduField(
+                                    e.getEducationStudyFieldByEducationStudyFieldId().getId(),
+                                    e.getEducationStudyFieldByEducationStudyFieldId().getTitle())
+                            )
+                            .build();
+                }).collect(Collectors.toList());
+
+        //set work experience list
+        List<CvData.WorkExperience> workExperiences = cvEntity.getWorkExperiencesById().stream()
+                .map(e -> {
+                    return CvData.WorkExperience.builder()
+                            .employer(e.getEmployer())
+                            .endDate(e.getEndDate())
+                            .startDate(e.getStartDate())
+                            .city(e.getCity())
+                            .isCurrentJob(e.getIsCurrentJob())
+                            .jobTitle(e.getJobTitle())
+                            .country(e.getCountry())
+                            .id(e.getId())
+                            .build();
+                }).collect(Collectors.toList());
+
+        //set prof qualifications
+        new ArrayList<>();
+        List<CvData.ProfQualification> profQualifications = cvEntity.getProfessionalQualificationsById().stream()
+                .map(e -> {
+                    return CvData.ProfQualification.builder()
+                            .description(e.getDescription())
+                            .field(e.getField())
+                            .title(e.getTitle())
+                            .id(e.getId())
+                            .build();
+                }).collect(Collectors.toList());
+
+        //set specific skills
+        List<CvData.SpecificSkill> specificSkills = cvEntity.getSpecificSkilsById().stream()
+                .map(e -> {
+                    return CvData.SpecificSkill.builder()
+                            .description(e.getDescription())
+                            .id(e.getId())
+                            .field(e.getField())
+                            .title(e.getTitle())
+                            .build();
+                }).collect(Collectors.toList());
+
+        return CvData.builder()
+                .city(cvEntity.getCity())
+                .contact_number(cvEntity.getContactNumber())
+                .country(cvEntity.getCountry())
+                .cvJobField(cvJobField)
+                .email(cvEntity.getEmail())
+                .id(cvEntity.getId())
+                .first_name(cvEntity.getFirstName())
+                .summery(cvEntity.getSummery())
+                .surname(cvEntity.getSurname())
+                .eduHistory(eduQualifications)
+                .profQualifications(profQualifications)
+                .specificSkills(specificSkills)
+                .workExperiences(workExperiences)
+                .build();
     }
 }

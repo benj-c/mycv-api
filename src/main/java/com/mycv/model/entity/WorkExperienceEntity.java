@@ -2,6 +2,7 @@ package com.mycv.model.entity;
 
 import javax.persistence.*;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity
@@ -28,10 +29,10 @@ public class WorkExperienceEntity {
     private Boolean isCurrentJob;
     @Basic
     @Column(name = "start_date", nullable = false)
-    private Date startDate;
+    private LocalDate startDate;
     @Basic
     @Column(name = "end_date", nullable = true)
-    private Date endDate;
+    private LocalDate endDate;
     @ManyToOne
     @JoinColumn(name = "cv_id", referencedColumnName = "id")
     private CvEntity cvByCvId;
@@ -84,19 +85,19 @@ public class WorkExperienceEntity {
         this.isCurrentJob = isCurrentJob;
     }
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 
