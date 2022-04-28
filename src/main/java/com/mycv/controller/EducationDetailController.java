@@ -9,10 +9,7 @@ import com.mycv.service.EducationDetailService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
@@ -85,4 +82,31 @@ public class EducationDetailController {
         }
     }
 
+    /**
+     * deletes given edu entry
+     *
+     * @param id
+     * @return
+     */
+    @DeleteMapping(
+            path = "/education/{id}",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @RolesAllowed(UserRoles.JOB_SEEKER)
+    public ResponseEntity<Response> deleteEduEntry(
+            @PathVariable int id
+    ) {
+        long startTime = System.currentTimeMillis();
+        log.info("Initiating|deleteEduEntry");
+        log.info("PathVars|id:{}", id);
+        try {
+            this.educationDetailService.deleteEducationDetailEntry(id);
+            Response response = Response.success("Educational qualification has successfully deleted")
+                    .build(ResponseType.OPERATION_SUCCESS);
+            log.info("Res|{}", response.toString());
+            return ResponseEntity.ok(response);
+        } finally {
+            log.info("Completed|deleteEduEntry|ProcessingTime:{}ms", System.currentTimeMillis() - startTime);
+        }
+    }
 }

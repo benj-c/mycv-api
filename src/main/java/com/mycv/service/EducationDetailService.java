@@ -94,4 +94,17 @@ public class EducationDetailService {
         log.info("updating entity");
         getEducationDetailRepository().save(entity);
     }
+
+    public void deleteEducationDetailEntry(int id) {
+        //check if user has access to the cv
+        String user = ApiUtil.getAuthUserName();
+        log.info("getting saved edu entry|Id:{}, user:{}", id, user);
+        EducationHistoryEntity entity = getEducationDetailRepository()
+                .findByEduIdAndUsername(id, user).<ApiException>orElseThrow(() -> {
+                    throw new ApiException(ResponseType.EDU_ENTRY_NOT_FOUND, "could not find edu qualification id:" + id);
+                });
+
+        log.info("deleting found entity");
+        getEducationDetailRepository().delete(entity);
+    }
 }
