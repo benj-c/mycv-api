@@ -1,5 +1,7 @@
 package com.mycv.model.entity;
 
+import org.hibernate.annotations.DynamicUpdate;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -10,11 +12,11 @@ import java.util.Objects;
 public class EducationHistoryEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "id", nullable = false)
+    @Column(name = "id", nullable = false, updatable = false)
     private Integer id;
 
-    @Column(name = "instituition_name", nullable = false, length = 255)
-    private String instituitionName;
+    @Column(name = "institution_name", nullable = false, length = 255)
+    private String institutionName;
 
     @Column(name = "location", nullable = false, length = 255)
     private String location;
@@ -24,10 +26,10 @@ public class EducationHistoryEntity {
 
     @ManyToOne
     @JoinColumn(name = "education_study_field_id", referencedColumnName = "id")
-    private EducationStudyFieldEntity educationStudyFieldByEducationStudyFieldId;
+    private EducationStudyFieldEntity educationStudyField;
 
     @ManyToOne
-    @JoinColumn(name = "cv_id", referencedColumnName = "id")
+    @JoinColumn(name = "cv_id", referencedColumnName = "id", updatable = false)
     private CvEntity cvByCvId;
 
     public Integer getId() {
@@ -38,12 +40,12 @@ public class EducationHistoryEntity {
         this.id = id;
     }
 
-    public String getInstituitionName() {
-        return instituitionName;
+    public String getInstitutionName() {
+        return institutionName;
     }
 
-    public void setInstituitionName(String instituitionName) {
-        this.instituitionName = instituitionName;
+    public void setInstitutionName(String institutionName) {
+        this.institutionName = institutionName;
     }
 
     public String getLocation() {
@@ -68,20 +70,20 @@ public class EducationHistoryEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         EducationHistoryEntity that = (EducationHistoryEntity) o;
-        return Objects.equals(id, that.id) && Objects.equals(instituitionName, that.instituitionName) && Objects.equals(location, that.location) && Objects.equals(awardedDate, that.awardedDate);
+        return Objects.equals(id, that.id) && Objects.equals(institutionName, that.institutionName) && Objects.equals(location, that.location) && Objects.equals(awardedDate, that.awardedDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, instituitionName, location, awardedDate);
+        return Objects.hash(id, institutionName, location, awardedDate);
     }
 
-    public EducationStudyFieldEntity getEducationStudyFieldByEducationStudyFieldId() {
-        return educationStudyFieldByEducationStudyFieldId;
+    public EducationStudyFieldEntity getEducationStudyField() {
+        return educationStudyField;
     }
 
-    public void setEducationStudyFieldByEducationStudyFieldId(EducationStudyFieldEntity educationStudyFieldByEducationStudyFieldId) {
-        this.educationStudyFieldByEducationStudyFieldId = educationStudyFieldByEducationStudyFieldId;
+    public void setEducationStudyField(EducationStudyFieldEntity educationStudyField) {
+        this.educationStudyField = educationStudyField;
     }
 
     public CvEntity getCvByCvId() {

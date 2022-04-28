@@ -16,7 +16,7 @@ public class EducationStudyFieldEntity {
     @Column(name = "title", nullable = false, length = 50)
     private String title;
 
-    @OneToMany(mappedBy = "educationStudyFieldByEducationStudyFieldId")
+    @OneToMany(mappedBy = "educationStudyField")
     private Collection<EducationHistoryEntity> educationHistoriesById;
 
     public Integer getId() {

@@ -18,7 +18,8 @@ public enum ResponseType {
     INVALID_OPERATION(1007, "invalid operation", HttpStatus.BAD_REQUEST),
     INACTIVE_USER(1008, "user is inactive", HttpStatus.FORBIDDEN),
     CV_NOT_FOUND(1009, "cv not found", HttpStatus.BAD_REQUEST),
-    NO_ACCESS_TO_RESOURCE(1010, "use has no access to the resource", HttpStatus.BAD_REQUEST)
+    NO_ACCESS_TO_RESOURCE(1010, "use has no access to the resource", HttpStatus.BAD_REQUEST),
+    EDU_ENTRY_NOT_FOUND(1011, "could not find edu qualification", HttpStatus.BAD_REQUEST)
     ;
 
     private int code;

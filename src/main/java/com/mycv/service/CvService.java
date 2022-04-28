@@ -79,12 +79,12 @@ public class CvService {
                 .map(e -> {
                     return CvData.EduQualification.builder()
                             .awardedDate(e.getAwardedDate())
-                            .instituitionName(e.getInstituitionName())
+                            .instituitionName(e.getInstitutionName())
                             .location(e.getLocation())
                             .id(e.getId())
                             .eduField(new CvData.EduQualification.EduField(
-                                    e.getEducationStudyFieldByEducationStudyFieldId().getId(),
-                                    e.getEducationStudyFieldByEducationStudyFieldId().getTitle())
+                                    e.getEducationStudyField().getId(),
+                                    e.getEducationStudyField().getTitle())
                             )
                             .build();
                 }).collect(Collectors.toList());
