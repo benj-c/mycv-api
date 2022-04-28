@@ -4,7 +4,6 @@ import com.mycv.exception.ResponseType;
 import com.mycv.model.Response;
 import com.mycv.model.UserRoles;
 import com.mycv.model.request.EduEntryRequest;
-import com.mycv.model.request.NewCv;
 import com.mycv.service.EducationDetailService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -20,7 +19,7 @@ import javax.validation.Valid;
 @Slf4j
 public class EducationDetailController {
 
-    private EducationDetailService educationDetailService;
+    private final EducationDetailService educationDetailService;
 
     public EducationDetailController(EducationDetailService educationDetailService) {
         this.educationDetailService = educationDetailService;
