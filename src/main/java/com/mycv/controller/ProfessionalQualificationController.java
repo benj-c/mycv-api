@@ -58,7 +58,7 @@ public class ProfessionalQualificationController {
     }
 
     /**
-     * creates new professional qualification entry
+     * update professional qualification entry
      *
      * @param request
      * @return
