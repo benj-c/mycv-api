@@ -16,8 +16,4 @@ public interface SpecificSkillRepository extends JpaRepository<SpecificSkilEntit
             @Param("user") String user
     );
 
-    @Query("from CvEntity ss where ss.userByUserId.userName = :username")
-    Optional<CvEntity> findByUserName(
-            @Param("username") String username
-    );
 }

@@ -22,7 +22,9 @@ public enum ResponseType {
     EDU_ENTRY_NOT_FOUND(1011, "could not find edu qualification", HttpStatus.BAD_REQUEST),
     USER_ALREADY_FOUND(1012, "user exists with the same username", HttpStatus.BAD_REQUEST),
     USER_ROLE_NOT_FOUND(1013, "user role could not find", HttpStatus.BAD_REQUEST),
-    PROF_QUAL_NOT_FOUND(1014, "professional qualification could not find", HttpStatus.BAD_REQUEST)
+    PROF_QUAL_NOT_FOUND(1014, "professional qualification could not find", HttpStatus.BAD_REQUEST),
+    SPECIFIC_SKILL_NOT_FOUND(1015, "specific skill could not find", HttpStatus.BAD_REQUEST),
+    WORK_EXPERIENCE_NOT_FOUND(1016, "work experience could not find", HttpStatus.BAD_REQUEST)
     ;
 
     private int code;

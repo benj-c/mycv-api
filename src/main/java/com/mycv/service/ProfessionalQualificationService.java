@@ -58,7 +58,7 @@ public class ProfessionalQualificationService {
         String user = ApiUtil.getAuthUserName();
         ProfessionalQualificationEntity entity = getQualificationRepository().findByPqIdAndUsername(request.getId(), user).<ApiException>orElseThrow(() -> {
             log.error("there's no qualification to update");
-            throw new ApiException(ResponseType.CV_NOT_FOUND, "there's no qualification to update");
+            throw new ApiException(ResponseType.PROF_QUAL_NOT_FOUND, "there's no qualification to update");
         });
 
         if (request.getTitle() != null && !Objects.equals(request.getTitle(), entity.getTitle())) {

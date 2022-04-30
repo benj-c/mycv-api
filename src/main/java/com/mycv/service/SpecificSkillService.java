@@ -3,8 +3,6 @@ package com.mycv.service;
 import com.mycv.exception.ApiException;
 import com.mycv.exception.ResponseType;
 import com.mycv.model.entity.CvEntity;
-import com.mycv.model.entity.EducationHistoryEntity;
-import com.mycv.model.entity.ProfessionalQualificationEntity;
 import com.mycv.model.entity.SpecificSkilEntity;
 import com.mycv.model.request.SpecificSkilRequest;
 import com.mycv.model.request.SpecificSkilUpdateRequest;
@@ -37,7 +35,7 @@ public class SpecificSkillService {
         //check if user has a cv
         String user = ApiUtil.getAuthUserName();
         log.info("retrieving cv by user|user:{}", user);
-        CvEntity foundCv = getSpecificSkillRepository().findByUserName(user).<ApiException>orElseThrow(() -> {
+        CvEntity foundCv = getCvRepository().findByUserName(user).<ApiException>orElseThrow(() -> {
             log.error("there's no cv for user");
             throw new ApiException(ResponseType.CV_NOT_FOUND, "there's no cv for user");
         });
@@ -58,7 +56,7 @@ public class SpecificSkillService {
         String user = ApiUtil.getAuthUserName();
         SpecificSkilEntity entity = getSpecificSkillRepository().findBySsIdAndUsername(request.getId(), user).<ApiException>orElseThrow(() -> {
             log.error("there's no specific skill to update");
-            throw new ApiException(ResponseType.CV_NOT_FOUND, "there's no specific skill to update");
+            throw new ApiException(ResponseType.SPECIFIC_SKILL_NOT_FOUND, "there's no specific skill to update");
         });
 
         if (request.getTitle() != null && !Objects.equals(request.getTitle(), entity.getTitle())) {
