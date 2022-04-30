@@ -14,4 +14,9 @@ public interface CvRepository extends JpaRepository<CvEntity, Integer> {
             @Param("username") String username,
             @Param("cvId") int cvId
     );
+
+    @Query("from CvEntity c where c.userByUserId.userName = :username")
+    Optional<CvEntity> findByUserName(
+            @Param("username") String username
+    );
 }

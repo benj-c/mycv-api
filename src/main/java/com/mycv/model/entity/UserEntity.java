@@ -1,6 +1,7 @@
 package com.mycv.model.entity;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.util.Collection;
 import java.util.Objects;
@@ -73,12 +74,12 @@ public class UserEntity {
         this.createdDate = createdDate;
     }
 
-    public Boolean getIsActive() {
+    public Boolean getActive() {
         return isActive;
     }
 
-    public void setIsActive(Boolean isActive) {
-        this.isActive = isActive;
+    public void setActive(Boolean active) {
+        isActive = active;
     }
 
     @Override

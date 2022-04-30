@@ -55,7 +55,7 @@ public class CvService {
         cvEntity.setCreatedDate(LocalDateTime.now());
         cvEntity.setEmail(newCv.getEmail());
         cvEntity.setFirstName(newCv.getFirst_name());
-        cvEntity.setIsDraft(true);
+        cvEntity.setDraft(true);
         cvEntity.setSummery(newCv.getSummery());
         cvEntity.setSurname(newCv.getSurname());
         cvEntity.setUserByUserId(userEntity);
@@ -78,14 +78,19 @@ public class CvService {
         List<CvData.EduQualification> eduQualifications = cvEntity.getEducationHistoriesById().stream()
                 .map(e -> {
                     return CvData.EduQualification.builder()
-                            .awardedDate(e.getAwardedDate())
-                            .instituitionName(e.getInstitutionName())
+                            .from(e.getStartDate())
+                            .to(e.getEndDate())
+                            .institutionName(e.getInstitutionName())
                             .location(e.getLocation())
                             .id(e.getId())
                             .eduField(new CvData.EduQualification.EduField(
                                     e.getEducationStudyField().getId(),
                                     e.getEducationStudyField().getTitle())
                             )
+                            .degreeLevel(new CvData.EduQualification.DegreeLevel(
+                                    e.getDegreeLevel().getId(),
+                                    e.getDegreeLevel().getLevel()
+                            ))
                             .build();
                 }).collect(Collectors.toList());
 
@@ -97,10 +102,14 @@ public class CvService {
                             .endDate(e.getEndDate())
                             .startDate(e.getStartDate())
                             .city(e.getCity())
-                            .isCurrentJob(e.getIsCurrentJob())
+                            .isCurrentJob(e.getCurrentJob())
                             .jobTitle(e.getJobTitle())
                             .country(e.getCountry())
                             .id(e.getId())
+                            .employmentType(new CvData.WorkExperience.EmploymentType(
+                                    e.getEmploymentType().getId(),
+                                    e.getEmploymentType().getType()
+                            ))
                             .build();
                 }).collect(Collectors.toList());
 
@@ -158,4 +167,5 @@ public class CvService {
         log.info("deleting cv|cvId:{}", cvEntity.getId());
         getCvRepository().deleteById(cvEntity.getId());
     }
+
 }

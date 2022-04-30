@@ -43,7 +43,7 @@ public class EducationDetailController {
         log.info("Initiating|createEduEntry");
         log.info("ReqBody|{}", eduEntryRequest.toString());
         try {
-            this.educationDetailService.addNewEducationDetailEntry(eduEntryRequest);
+            this.educationDetailService.create(eduEntryRequest);
             Response response = Response.success("Educational qualification has successfully added")
                     .build(ResponseType.OPERATION_SUCCESS);
             log.info("Res|{}", response.toString());
@@ -72,7 +72,7 @@ public class EducationDetailController {
         log.info("Initiating|updateEduEntry");
         log.info("ReqBody|{}", request.toString());
         try {
-            this.educationDetailService.updateEducationDetailEntry(request);
+            this.educationDetailService.update(request);
             Response response = Response.success("Educational qualification has successfully updated")
                     .build(ResponseType.OPERATION_SUCCESS);
             log.info("Res|{}", response.toString());
@@ -100,7 +100,7 @@ public class EducationDetailController {
         log.info("Initiating|deleteEduEntry");
         log.info("PathVars|id:{}", id);
         try {
-            this.educationDetailService.deleteEducationDetailEntry(id);
+            this.educationDetailService.delete(id);
             Response response = Response.success("Educational qualification has successfully deleted")
                     .build(ResponseType.OPERATION_SUCCESS);
             log.info("Res|{}", response.toString());

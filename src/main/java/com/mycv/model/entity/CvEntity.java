@@ -2,6 +2,7 @@ package com.mycv.model.entity;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Objects;
@@ -13,54 +14,47 @@ public class CvEntity {
     @Id
     @Column(name = "id", nullable = false)
     private Integer id;
-
+    @Basic
     @Column(name = "created_date", nullable = false)
     private LocalDateTime createdDate;
-
+    @Basic
     @Column(name = "is_draft", nullable = false)
     private Boolean isDraft;
-
+    @Basic
     @Column(name = "summery", nullable = false, columnDefinition = "MEDIUMTEXT")
     private String summery;
-
+    @Basic
     @Column(name = "first_name", nullable = false, length = 255)
     private String firstName;
-
+    @Basic
     @Column(name = "surname", nullable = false, length = 255)
     private String surname;
-
+    @Basic
     @Column(name = "country", nullable = false, length = 255)
     private String country;
-
+    @Basic
     @Column(name = "city", nullable = false, length = 255)
     private String city;
-
+    @Basic
     @Column(name = "email", nullable = false, length = 255)
     private String email;
-
+    @Basic
     @Column(name = "contact_number", nullable = false, length = 15)
     private String contactNumber;
-
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private UserEntity userByUserId;
-
     @ManyToOne
     @JoinColumn(name = "job_field_id", referencedColumnName = "id")
     private CvJobFieldEntity cvJobFieldByJobFieldId;
-
     @OneToMany(mappedBy = "cvByCvId")
     private Collection<EducationHistoryEntity> educationHistoriesById;
-
     @OneToMany(mappedBy = "cvByCvId")
     private Collection<ProfessionalQualificationEntity> professionalQualificationsById;
-
     @OneToMany(mappedBy = "cvByCvId")
     private Collection<SpecificSkilEntity> specificSkilsById;
-
     @OneToMany(mappedBy = "cvByCvId")
     private Collection<WorkExperienceEntity> workExperiencesById;
-
 
     public Integer getId() {
         return id;
@@ -78,12 +72,12 @@ public class CvEntity {
         this.createdDate = createdDate;
     }
 
-    public Boolean getIsDraft() {
+    public Boolean getDraft() {
         return isDraft;
     }
 
-    public void setIsDraft(Boolean isDraft) {
-        this.isDraft = isDraft;
+    public void setDraft(Boolean draft) {
+        isDraft = draft;
     }
 
     public String getSummery() {

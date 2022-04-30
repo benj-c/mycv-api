@@ -11,10 +11,9 @@ public class CvJobFieldEntity {
     @Id
     @Column(name = "id", nullable = false)
     private Integer id;
-
+    @Basic
     @Column(name = "field", nullable = false, length = 255)
     private String field;
-
     @OneToMany(mappedBy = "cvJobFieldByJobFieldId")
     private Collection<CvEntity> cvsById;
 

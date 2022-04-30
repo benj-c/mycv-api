@@ -10,19 +10,15 @@ public class SpecificSkilEntity {
     @Id
     @Column(name = "id", nullable = false)
     private Integer id;
-
     @Basic
     @Column(name = "title", nullable = false, length = 255)
     private String title;
-
     @Basic
     @Column(name = "description", nullable = false, length = 255)
     private String description;
-
     @Basic
     @Column(name = "field", nullable = false, length = 255)
     private String field;
-
     @ManyToOne
     @JoinColumn(name = "cv_id", referencedColumnName = "id", nullable = false)
     private CvEntity cvByCvId;

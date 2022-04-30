@@ -9,8 +9,10 @@ import java.time.LocalDate;
 @ToString
 public class EduEntryRequest {
     private String institutionName;
+    private String title;
     private String location;
-    private LocalDate awardedDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private int eduFieldId;
-    private int cvId;
+    private int degreeLevelId;
 }

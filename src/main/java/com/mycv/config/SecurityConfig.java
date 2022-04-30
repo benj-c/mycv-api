@@ -28,7 +28,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private static final String[] PERMITTED_URIS = {
             "/authenticate",
             "/swagger-ui/**",
-            "/v3/**"
+            "/v3/**",
+            "/user/register"
     };
 
     @Autowired

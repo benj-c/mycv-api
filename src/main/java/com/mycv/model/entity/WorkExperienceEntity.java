@@ -36,6 +36,9 @@ public class WorkExperienceEntity {
     @ManyToOne
     @JoinColumn(name = "cv_id", referencedColumnName = "id")
     private CvEntity cvByCvId;
+    @ManyToOne
+    @JoinColumn(name = "employment_type_id", referencedColumnName = "id")
+    private EmploymentTypeEntity employmentTypeByEmploymentTypeId;
 
     public Integer getId() {
         return id;
@@ -77,12 +80,12 @@ public class WorkExperienceEntity {
         this.city = city;
     }
 
-    public Boolean getIsCurrentJob() {
+    public Boolean getCurrentJob() {
         return isCurrentJob;
     }
 
-    public void setIsCurrentJob(Boolean isCurrentJob) {
-        this.isCurrentJob = isCurrentJob;
+    public void setCurrentJob(Boolean currentJob) {
+        isCurrentJob = currentJob;
     }
 
     public LocalDate getStartDate() {
@@ -120,5 +123,13 @@ public class WorkExperienceEntity {
 
     public void setCvByCvId(CvEntity cvByCvId) {
         this.cvByCvId = cvByCvId;
+    }
+
+    public EmploymentTypeEntity getEmploymentType() {
+        return employmentTypeByEmploymentTypeId;
+    }
+
+    public void setEmploymentType(EmploymentTypeEntity employmentTypeByEmploymentTypeId) {
+        this.employmentTypeByEmploymentTypeId = employmentTypeByEmploymentTypeId;
     }
 }

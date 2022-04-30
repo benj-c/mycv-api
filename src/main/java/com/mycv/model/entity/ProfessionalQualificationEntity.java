@@ -59,8 +59,8 @@ public class ProfessionalQualificationEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        ProfessionalQualificationEntity that = (ProfessionalQualificationEntity) o;
-        return Objects.equals(id, that.id) && Objects.equals(title, that.title) && Objects.equals(field, that.field) && Objects.equals(description, that.description);
+        ProfessionalQualificationEntity entity = (ProfessionalQualificationEntity) o;
+        return Objects.equals(id, entity.id) && Objects.equals(title, entity.title) && Objects.equals(field, entity.field) && Objects.equals(description, entity.description);
     }
 
     @Override

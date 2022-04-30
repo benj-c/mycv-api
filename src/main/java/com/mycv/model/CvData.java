@@ -36,14 +36,23 @@ public class CvData {
     @Builder
     public static class EduQualification {
         private Integer id;
-        private String instituitionName;
+        private String institutionName;
         private String location;
-        private LocalDate awardedDate;
+        private LocalDate from;
+        private LocalDate to;
         private EduField eduField;
+        private DegreeLevel degreeLevel;
 
         @Data
         @AllArgsConstructor
         public static class EduField {
+            private int id;
+            private String title;
+        }
+
+        @Data
+        @AllArgsConstructor
+        public static class DegreeLevel {
             private int id;
             private String title;
         }
@@ -78,5 +87,13 @@ public class CvData {
         private Boolean isCurrentJob;
         private LocalDate startDate;
         private LocalDate endDate;
+        private EmploymentType employmentType;
+
+        @Data
+        @AllArgsConstructor
+        public static class EmploymentType {
+            private int id;
+            private String title;
+        }
     }
 }

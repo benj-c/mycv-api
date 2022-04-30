@@ -10,7 +10,10 @@ import java.time.LocalDate;
 public class EduEntryUpdateRequest {
     private int id;
     private String institutionName;
+    private String title;
     private String location;
-    private LocalDate awardedDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private int eduFieldId;
+    private int degreeLevelId;
 }

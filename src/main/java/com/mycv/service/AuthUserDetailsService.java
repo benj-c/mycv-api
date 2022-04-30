@@ -35,7 +35,7 @@ public class AuthUserDetailsService implements UserDetailsService {
         return new User(
                 userEntity.getUserName(),
                 userEntity.getPassword(),
-                userEntity.getIsActive(),
+                userEntity.getActive(),
                 true,
                 true,
                 true,

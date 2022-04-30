@@ -18,4 +18,6 @@ public class UserCredentialsRequest {
 
     @NotEmpty(message = "Password cannot be empty")
     private String password;
+
+    private String role;
 }

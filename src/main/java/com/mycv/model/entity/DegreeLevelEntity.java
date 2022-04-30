@@ -5,16 +5,16 @@ import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-@Table(name = "education_study_field", schema = "mycvdb", catalog = "")
-public class EducationStudyFieldEntity {
+@Table(name = "degree_level", schema = "mycvdb", catalog = "")
+public class DegreeLevelEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "id", nullable = false)
+    @Column(name = "ID", nullable = false)
     private Integer id;
     @Basic
-    @Column(name = "title", nullable = false, length = 50)
-    private String title;
-    @OneToMany(mappedBy = "educationStudyFieldByEducationStudyFieldId")
+    @Column(name = "level", nullable = false, length = 50)
+    private String level;
+    @OneToMany(mappedBy = "degreeLevelByDegreeLevelId")
     private Collection<EducationHistoryEntity> educationHistoriesById;
 
     public Integer getId() {
@@ -25,25 +25,25 @@ public class EducationStudyFieldEntity {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getLevel() {
+        return level;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setLevel(String level) {
+        this.level = level;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        EducationStudyFieldEntity that = (EducationStudyFieldEntity) o;
-        return Objects.equals(id, that.id) && Objects.equals(title, that.title);
+        DegreeLevelEntity that = (DegreeLevelEntity) o;
+        return Objects.equals(id, that.id) && Objects.equals(level, that.level);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title);
+        return Objects.hash(id, level);
     }
 
     public Collection<EducationHistoryEntity> getEducationHistoriesById() {

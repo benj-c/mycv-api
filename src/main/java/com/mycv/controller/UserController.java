@@ -92,4 +92,61 @@ public class UserController {
             log.info("Completed|actDeactUser|ProcessingTime:{}ms", System.currentTimeMillis() - startTime);
         }
     }
+
+
+    /**
+     * register new user, job_seeker
+     * @param userCredentialsRequest
+     * @return
+     */
+    @PostMapping(
+            path = "/user/register",
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.APPLICATION_JSON_VALUE
+    )
+    public ResponseEntity<Response> registerUser(
+            @Valid @RequestBody UserCredentialsRequest userCredentialsRequest
+    ) {
+        long startTime = System.currentTimeMillis();
+        log.info("Initiating|registerUser");
+        log.info("ReqBody|{}", userCredentialsRequest.toString());
+        try {
+            userCredentialsRequest.setRole(UserRoles.JOB_SEEKER);
+            userService.createUser(userCredentialsRequest);
+            Response response = Response.success("User has successfully created")
+                    .build(ResponseType.OPERATION_SUCCESS);
+            log.info("Res|{}", response.toString());
+            return ResponseEntity.ok(response);
+        } finally {
+            log.info("Completed|registerUser|ProcessingTime:{}ms", System.currentTimeMillis() - startTime);
+        }
+    }
+
+    /**
+     * create new user
+     * @param userCredentialsRequest
+     * @return
+     */
+    @PostMapping(
+            path = "/user/create",
+            produces = MediaType.APPLICATION_JSON_VALUE,
+            consumes = MediaType.APPLICATION_JSON_VALUE
+    )
+    @RolesAllowed({UserRoles.ADMIN})
+    public ResponseEntity<Response> createUser(
+            @Valid @RequestBody UserCredentialsRequest userCredentialsRequest
+    ) {
+        long startTime = System.currentTimeMillis();
+        log.info("Initiating|createUser");
+        log.info("ReqBody|{}", userCredentialsRequest.toString());
+        try {
+            userService.createUser(userCredentialsRequest);
+            Response response = Response.success("User has successfully created")
+                    .build(ResponseType.OPERATION_SUCCESS);
+            log.info("Res|{}", response.toString());
+            return ResponseEntity.ok(response);
+        } finally {
+            log.info("Completed|createUser|ProcessingTime:{}ms", System.currentTimeMillis() - startTime);
+        }
+    }
 }
