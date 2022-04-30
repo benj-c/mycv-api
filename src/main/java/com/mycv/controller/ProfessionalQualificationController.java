@@ -10,10 +10,7 @@ import com.mycv.service.ProfessionalQualificationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
@@ -86,4 +83,31 @@ public class ProfessionalQualificationController {
         }
     }
 
+    /**
+     * deletes given professional qualification entry
+     *
+     * @param id
+     * @return
+     */
+    @DeleteMapping(
+            path = "/proqual/{id}",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @RolesAllowed(UserRoles.JOB_SEEKER)
+    public ResponseEntity<Response> deleteProQual(
+            @PathVariable int id
+    ) {
+        long startTime = System.currentTimeMillis();
+        log.info("Initiating|deleteProQual");
+        log.info("PathVars|id:{}", id);
+        try {
+            qualificationService.delete(id);
+            Response response = Response.success("Professional qualification has successfully deleted")
+                    .build(ResponseType.OPERATION_SUCCESS);
+            log.info("Res|{}", response.toString());
+            return ResponseEntity.ok(response);
+        } finally {
+            log.info("Completed|deleteProQual|ProcessingTime:{}ms", System.currentTimeMillis() - startTime);
+        }
+    }
 }

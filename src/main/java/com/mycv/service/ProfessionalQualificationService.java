@@ -5,6 +5,7 @@ import com.mycv.exception.ResponseType;
 import com.mycv.model.entity.CvEntity;
 import com.mycv.model.entity.EducationHistoryEntity;
 import com.mycv.model.entity.ProfessionalQualificationEntity;
+import com.mycv.model.entity.SpecificSkilEntity;
 import com.mycv.model.request.ProQualRequest;
 import com.mycv.model.request.ProfQualUpdateRequest;
 import com.mycv.repository.CvRepository;
@@ -71,5 +72,18 @@ public class ProfessionalQualificationService {
         }
 
         getQualificationRepository().save(entity);
+    }
+
+    public void delete(int id) {
+        //check if user has access to the cv
+        String user = ApiUtil.getAuthUserName();
+        log.info("getting saved edu entry|Id:{}, user:{}", id, user);
+        ProfessionalQualificationEntity entity = getQualificationRepository()
+                .findByPqIdAndUsername(id, user).<ApiException>orElseThrow(() -> {
+                    throw new ApiException(ResponseType.EDU_ENTRY_NOT_FOUND, "could not find professional skill id:" + id);
+                });
+
+        log.info("deleting found entity");
+        getQualificationRepository().delete(entity);
     }
 }
