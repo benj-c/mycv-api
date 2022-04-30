@@ -1,4 +1,4 @@
-package com.mycv.service;
+package com.mycv.repository;
 
 import com.mycv.model.entity.UserRoleEntity;
 import org.springframework.data.jpa.repository.JpaRepository;

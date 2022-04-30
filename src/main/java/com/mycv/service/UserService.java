@@ -8,6 +8,7 @@ import com.mycv.model.entity.UserEntity;
 import com.mycv.model.entity.UserRoleEntity;
 import com.mycv.model.request.UserCredentialsRequest;
 import com.mycv.repository.UserRepository;
+import com.mycv.repository.UserRoleRepository;
 import com.mycv.util.ApiUtil;
 import com.mycv.util.JwtUtil;
 import lombok.Data;
