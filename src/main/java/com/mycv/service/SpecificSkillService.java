@@ -3,6 +3,7 @@ package com.mycv.service;
 import com.mycv.exception.ApiException;
 import com.mycv.exception.ResponseType;
 import com.mycv.model.entity.CvEntity;
+import com.mycv.model.entity.EducationHistoryEntity;
 import com.mycv.model.entity.ProfessionalQualificationEntity;
 import com.mycv.model.entity.SpecificSkilEntity;
 import com.mycv.model.request.SpecificSkilRequest;
@@ -71,5 +72,18 @@ public class SpecificSkillService {
         }
 
         getSpecificSkillRepository().save(entity);
+    }
+
+    public void delete(int id) {
+        //check if user has access to the cv
+        String user = ApiUtil.getAuthUserName();
+        log.info("getting saved edu entry|Id:{}, user:{}", id, user);
+        SpecificSkilEntity entity = getSpecificSkillRepository()
+                .findBySsIdAndUsername(id, user).<ApiException>orElseThrow(() -> {
+                    throw new ApiException(ResponseType.EDU_ENTRY_NOT_FOUND, "could not find specific skill id:" + id);
+                });
+
+        log.info("deleting found entity");
+        getSpecificSkillRepository().delete(entity);
     }
 }
