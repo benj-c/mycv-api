@@ -1,0 +1,671 @@
+{
+	"info": {
+		"_postman_id": "a45f5760-015c-44c0-be5b-6379e50b7b39",
+		"name": "mycv-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "authenticate",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"john\",\r\n    \"password\": \"abc\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8401/api/authenticate",
+							"host": [
+								"localhost"
+							],
+							"port": "8401",
+							"path": [
+								"api",
+								"authenticate"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "get user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NTEwOTU3NzksImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6ODQwMC9hcGkiLCJzdWIiOiIiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0Ojg0MDEvc3ZyIiwidXNlcklkIjoxLCJzY29wZSI6IlJPTEVfSk9CX1NFRUtFUiIsInVzZXJOYW1lIjoiZGVtb191c2VyIn0.9wUK3bxZGH3AncaR6-QmDqPQPGX_S5yaV5d4QCvIMrR8Wx9ztyCnEyqHDhpPplSeYtCARmFjsZh-YiHWsdgAFw",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8401/api/user/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8401",
+							"path": [
+								"api",
+								"user",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "act-deact user",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NTExMDQzMjQsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6ODQwMC9hcGkiLCJzdWIiOiIiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0Ojg0MDEvc3ZyIiwidXNlcklkIjoyLCJzY29wZSI6IkFETUlOIiwidXNlck5hbWUiOiJkZW1vX2FkbWluIn0.4VlxnNRVY3w69mzsCPUFTHgmZ5ftjZWG5BVUdao3i8lyQvZTrgJIxl7Ed3V84iLee2_MRTaBZgyt2oIeVzLbyQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "localhost:8401/api/user/act-deact/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8401",
+							"path": [
+								"api",
+								"user",
+								"act-deact",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register job seeker",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"john\",\r\n    \"password\": \"abc\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8401/api/user/register",
+							"host": [
+								"localhost"
+							],
+							"port": "8401",
+							"path": [
+								"api",
+								"user",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{api_key}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"john\",\r\n    \"password\": \"abc\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8401/api/user/create",
+							"host": [
+								"localhost"
+							],
+							"port": "8401",
+							"path": [
+								"api",
+								"user",
+								"create"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "cv",
+			"item": [
+				{
+					"name": "delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{api_key}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8401/api/cv/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8401",
+							"path": [
+								"api",
+								"cv",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{api_key}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"summery\": \"mycv ssample cv\",\r\n    \"first_name\": \"john\",\r\n    \"surname\": \"boonie\",\r\n    \"country\": \"sri lanka\",\r\n    \"city\": \"colombo\",\r\n    \"email\": \"john@asdasd.com\",\r\n    \"contact_number\": \"0718987778\",\r\n    \"job_field_id\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8401/api/cv",
+							"host": [
+								"localhost"
+							],
+							"port": "8401",
+							"path": [
+								"api",
+								"cv"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{api_key}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8401/api/cv/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8401",
+							"path": [
+								"api",
+								"cv",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "New Request",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{api_key}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"summery\": \"sc summery updated\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": ""
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "education",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{api_key}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"institutionName\": \"esoft\",\r\n    \"location\": \"colombo\",\r\n    \"startDate\": \"2015-10-10\",\r\n    \"endDate\": \"2017-10-10\",\r\n    \"eduFieldId\": 1,\r\n    \"degreeLevelId\": 5\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8401/api/education",
+							"host": [
+								"localhost"
+							],
+							"port": "8401",
+							"path": [
+								"api",
+								"education"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{api_key}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 4,\r\n    \"title\": \"Bcs\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8401/api/education",
+							"host": [
+								"localhost"
+							],
+							"port": "8401",
+							"path": [
+								"api",
+								"education"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{api_key}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8401/api/education/1",
+							"host": [
+								"localhost"
+							],
+							"port": "8401",
+							"path": [
+								"api",
+								"education",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "prof-qualification",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{api_key}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"degree\",\r\n    \"field\": \"CS\",\r\n    \"description\": \"degree in CS\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8401/api/proqual",
+							"host": [
+								"localhost"
+							],
+							"port": "8401",
+							"path": [
+								"api",
+								"proqual"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{api_key}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"title\": \"master degree\",\r\n    \"field\": \"CS\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8401/api/proqual",
+							"host": [
+								"localhost"
+							],
+							"port": "8401",
+							"path": [
+								"api",
+								"proqual"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{api_key}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8401/api/proqual/2",
+							"host": [
+								"localhost"
+							],
+							"port": "8401",
+							"path": [
+								"api",
+								"proqual",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "specific skill",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{api_key}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"degree\",\r\n    \"field\": \"CS\",\r\n    \"description\": \"degree in CS\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8401/api/specific-skill",
+							"host": [
+								"localhost"
+							],
+							"port": "8401",
+							"path": [
+								"api",
+								"specific-skill"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{api_key}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"title\": \"certification\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8401/api/specific-skill",
+							"host": [
+								"localhost"
+							],
+							"port": "8401",
+							"path": [
+								"api",
+								"specific-skill"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{api_key}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "localhost:8401/api/specific-skill/3",
+							"host": [
+								"localhost"
+							],
+							"port": "8401",
+							"path": [
+								"api",
+								"specific-skill",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "api_key",
+			"value": "eyJhbGciOiJIUzUxMiJ9.eyJleHAiOjE2NTExMTU3NjMsImlzcyI6Imh0dHA6Ly9sb2NhbGhvc3Q6ODQwMC9hcGkiLCJzdWIiOiIiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0Ojg0MDEvc3ZyIiwidXNlcklkIjo1LCJzY29wZSI6IkpPQl9TRUVLRVIiLCJ1c2VyTmFtZSI6ImRlbW9fdXNlcl8yIn0.XO4Eu-KyAssPmHQbVy0hBMmMiMap_41-0J8o5r7fjxIbjgnmcEJkIDsOFvDAesIZylu3abS9pZUPlV3ytF7qkw"
+		}
+	]
+}
