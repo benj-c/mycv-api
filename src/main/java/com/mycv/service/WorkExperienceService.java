@@ -109,4 +109,9 @@ public class WorkExperienceService {
         log.info("deleting found entity");
         getWorkExperienceRepository().delete(entity);
     }
+
+    public List<WorkExperienceEntity> get(){
+        String user = ApiUtil.getAuthUserName();
+        return getWorkExperienceRepository().findByUser(user);
+    }
 }
