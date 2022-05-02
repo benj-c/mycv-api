@@ -6,6 +6,8 @@ import com.mycv.model.CvData;
 import com.mycv.model.entity.CvEntity;
 import com.mycv.model.entity.CvJobFieldEntity;
 import com.mycv.model.entity.UserEntity;
+import com.mycv.model.entity.WorkExperienceEntity;
+import com.mycv.model.request.CvUpdateRequest;
 import com.mycv.model.request.NewCv;
 import com.mycv.repository.CvRepository;
 import com.mycv.repository.UserRepository;
@@ -18,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -168,4 +171,41 @@ public class CvService {
         getCvRepository().deleteById(cvEntity.getId());
     }
 
+    public void update(CvUpdateRequest request) {
+        String user = ApiUtil.getAuthUserName();
+        CvEntity entity = getCvRepository().findByUserNameAndCvId(user, request.getId()).<ApiException>orElseThrow(() -> {
+            log.error("there's no cv to update");
+            throw new ApiException(ResponseType.WORK_EXPERIENCE_NOT_FOUND, "there's no cv to update");
+        });
+
+        if (request.getFirstName() != null && !Objects.equals(request.getFirstName(), entity.getFirstName())) {
+            entity.setFirstName(request.getFirstName());
+        }
+
+        if (request.getSurname() != null && !Objects.equals(request.getSurname(), entity.getSurname())) {
+            entity.setSurname(request.getSurname());
+        }
+
+        if (request.getCountry() != null && !Objects.equals(request.getCountry(), entity.getCountry())) {
+            entity.setCountry(request.getCountry());
+        }
+
+        if (request.getCity() != null && !Objects.equals(request.getCity(), entity.getCity())) {
+            entity.setCity(request.getCity());
+        }
+
+        if (request.getEmail() != null && !Objects.equals(request.getEmail(), entity.getEmail())) {
+            entity.setEmail(request.getEmail());
+        }
+
+        if (request.getContactNumber() != null && !Objects.equals(request.getContactNumber(), entity.getContactNumber())) {
+            entity.setContactNumber(request.getContactNumber());
+        }
+
+        if (request.getSummery() != null && !Objects.equals(request.getSummery(), entity.getSummery())) {
+            entity.setSummery(request.getSummery());
+        }
+
+        getCvRepository().save(entity);
+    }
 }
