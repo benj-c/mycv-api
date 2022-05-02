@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface EducationDetailRepository extends JpaRepository<EducationHistoryEntity, Integer> {
@@ -14,4 +15,7 @@ public interface EducationDetailRepository extends JpaRepository<EducationHistor
             @Param("eduId") int eduId,
             @Param("user") String user
     );
+
+    @Query("select e from EducationHistoryEntity e, CvEntity c, UserEntity u where e.cvByCvId = c.id and c.userByUserId = u.id and u.userName = :user")
+    List<EducationHistoryEntity> findByUser(@Param("user") String user);
 }

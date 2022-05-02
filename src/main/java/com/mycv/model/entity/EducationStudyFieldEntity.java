@@ -1,5 +1,7 @@
 package com.mycv.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.Objects;
@@ -14,6 +16,7 @@ public class EducationStudyFieldEntity {
     @Basic
     @Column(name = "title", nullable = false, length = 50)
     private String title;
+    @JsonIgnore
     @OneToMany(mappedBy = "educationStudyFieldByEducationStudyFieldId")
     private Collection<EducationHistoryEntity> educationHistoriesById;
 

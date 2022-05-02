@@ -13,6 +13,7 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -31,7 +32,7 @@ public class SpecificSkillService {
         this.cvRepository = cvRepository;
     }
 
-    public void create(SpecificSkilRequest request) {
+    public List<SpecificSkilEntity> create(SpecificSkilRequest request) {
         //check if user has a cv
         String user = ApiUtil.getAuthUserName();
         log.info("retrieving cv by user|user:{}", user);
@@ -50,6 +51,7 @@ public class SpecificSkillService {
         entity.setCvByCvId(cvEntity);
 
         getSpecificSkillRepository().save(entity);
+        return getSpecificSkillRepository().findByUser(user);
     }
 
     public void update(SpecificSkilUpdateRequest request) {

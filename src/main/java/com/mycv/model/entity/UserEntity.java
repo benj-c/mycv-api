@@ -1,5 +1,7 @@
 package com.mycv.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -28,8 +30,10 @@ public class UserEntity {
     @Basic
     @Column(name = "is_active", nullable = false)
     private Boolean isActive;
+    @JsonIgnore
     @OneToMany(mappedBy = "userByUserId")
     private Collection<CvEntity> cvsById;
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_role_id", referencedColumnName = "id")
     private UserRoleEntity userRoleByUserRoleId;

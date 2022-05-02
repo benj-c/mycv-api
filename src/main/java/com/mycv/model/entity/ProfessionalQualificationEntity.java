@@ -1,5 +1,7 @@
 package com.mycv.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -19,6 +21,7 @@ public class ProfessionalQualificationEntity {
     @Basic
     @Column(name = "description", nullable = false, length = 255)
     private String description;
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "cv_id", referencedColumnName = "id")
     private CvEntity cvByCvId;

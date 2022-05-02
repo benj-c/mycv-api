@@ -1,5 +1,7 @@
 package com.mycv.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.sql.Date;
 import java.time.LocalDate;
@@ -33,9 +35,11 @@ public class WorkExperienceEntity {
     @Basic
     @Column(name = "end_date", nullable = true)
     private LocalDate endDate;
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "cv_id", referencedColumnName = "id")
     private CvEntity cvByCvId;
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "employment_type_id", referencedColumnName = "id")
     private EmploymentTypeEntity employmentTypeByEmploymentTypeId;

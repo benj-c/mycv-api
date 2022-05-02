@@ -3,9 +3,7 @@ package com.mycv.service;
 import com.mycv.exception.ApiException;
 import com.mycv.exception.ResponseType;
 import com.mycv.model.entity.CvEntity;
-import com.mycv.model.entity.EducationHistoryEntity;
 import com.mycv.model.entity.ProfessionalQualificationEntity;
-import com.mycv.model.entity.SpecificSkilEntity;
 import com.mycv.model.request.ProQualRequest;
 import com.mycv.model.request.ProfQualUpdateRequest;
 import com.mycv.repository.CvRepository;
@@ -15,6 +13,7 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -33,7 +32,7 @@ public class ProfessionalQualificationService {
         this.cvRepository = cvRepository;
     }
 
-    public void create(ProQualRequest request) {
+    public List<ProfessionalQualificationEntity> create(ProQualRequest request) {
         //check if user has access to the cv id
         String user = ApiUtil.getAuthUserName();
         log.info("retrieving cv by user|user:{}", user);
@@ -52,6 +51,7 @@ public class ProfessionalQualificationService {
         entity.setCvByCvId(cvEntity);
 
         getQualificationRepository().save(entity);
+        return getQualificationRepository().findByUser(user);
     }
 
     public void update(ProfQualUpdateRequest request) {

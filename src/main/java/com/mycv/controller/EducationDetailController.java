@@ -3,6 +3,7 @@ package com.mycv.controller;
 import com.mycv.exception.ResponseType;
 import com.mycv.model.Response;
 import com.mycv.model.UserRoles;
+import com.mycv.model.entity.EducationHistoryEntity;
 import com.mycv.model.request.EduEntryRequest;
 import com.mycv.model.request.EduEntryUpdateRequest;
 import com.mycv.service.EducationDetailService;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @Slf4j
@@ -43,8 +45,8 @@ public class EducationDetailController {
         log.info("Initiating|createEduEntry");
         log.info("ReqBody|{}", eduEntryRequest.toString());
         try {
-            this.educationDetailService.create(eduEntryRequest);
-            Response response = Response.success("Educational qualification has successfully added")
+            List<EducationHistoryEntity> educationHistoryEntities = this.educationDetailService.create(eduEntryRequest);
+            Response response = Response.success(educationHistoryEntities)
                     .build(ResponseType.OPERATION_SUCCESS);
             log.info("Res|{}", response.toString());
             return ResponseEntity.ok(response);

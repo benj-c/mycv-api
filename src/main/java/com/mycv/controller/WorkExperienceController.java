@@ -3,6 +3,7 @@ package com.mycv.controller;
 import com.mycv.exception.ResponseType;
 import com.mycv.model.Response;
 import com.mycv.model.UserRoles;
+import com.mycv.model.entity.WorkExperienceEntity;
 import com.mycv.model.request.WorkExpRequest;
 import com.mycv.model.request.WorkExpUpdateRequest;
 import com.mycv.service.WorkExperienceService;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @Slf4j
@@ -45,8 +47,8 @@ public class WorkExperienceController {
         log.info("Initiating|createWorkExp");
         log.info("ReqBody|{}", request.toString());
         try {
-            this.workExperienceService.create(request);
-            Response response = Response.success("work experience has successfully added")
+            List<WorkExperienceEntity> workExperienceEntities = this.workExperienceService.create(request);
+            Response response = Response.success(workExperienceEntities)
                     .build(ResponseType.OPERATION_SUCCESS);
             log.info("Res|{}", response.toString());
             return ResponseEntity.ok(response);

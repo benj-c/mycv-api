@@ -1,5 +1,7 @@
 package com.mycv.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.Objects;
@@ -26,12 +28,18 @@ public class EducationHistoryEntity {
     @Basic
     @Column(name = "start_date", nullable = false)
     private LocalDate startDate;
+
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "degree_level_id", referencedColumnName = "ID")
     private DegreeLevelEntity degreeLevelByDegreeLevelId;
+
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "education_study_field_id", referencedColumnName = "id")
     private EducationStudyFieldEntity educationStudyFieldByEducationStudyFieldId;
+
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "cv_id", referencedColumnName = "id")
     private CvEntity cvByCvId;

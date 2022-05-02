@@ -225,7 +225,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"summery\": \"mycv ssample cv\",\r\n    \"first_name\": \"john\",\r\n    \"surname\": \"boonie\",\r\n    \"country\": \"sri lanka\",\r\n    \"city\": \"colombo\",\r\n    \"email\": \"john@asdasd.com\",\r\n    \"contact_number\": \"0718987778\",\r\n    \"job_field_id\": 1\r\n}",
+							"raw": "{\r\n    \"summery\": \"mycv ssample cv\",\r\n    \"first_name\": \"demo\",\r\n    \"surname\": \"boonie\",\r\n    \"country\": \"sri lanka\",\r\n    \"city\": \"colombo\",\r\n    \"email\": \"john@asdasd.com\",\r\n    \"contact_number\": \"0718987778\",\r\n    \"job_field_id\": 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -328,7 +328,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"institutionName\": \"esoft\",\r\n    \"location\": \"colombo\",\r\n    \"startDate\": \"2015-10-10\",\r\n    \"endDate\": \"2017-10-10\",\r\n    \"eduFieldId\": 1,\r\n    \"degreeLevelId\": 5\r\n}\r\n",
+							"raw": "{\r\n    \"title\": \"title_x\",\r\n    \"institutionName\": \"esoft\",\r\n    \"location\": \"colombo\",\r\n    \"startDate\": \"2015-10-10\",\r\n    \"endDate\": \"2017-10-10\",\r\n    \"eduFieldId\": 1,\r\n    \"degreeLevelId\": 5\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"

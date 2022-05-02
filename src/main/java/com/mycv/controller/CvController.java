@@ -4,6 +4,7 @@ import com.mycv.exception.ResponseType;
 import com.mycv.model.CvData;
 import com.mycv.model.Response;
 import com.mycv.model.UserRoles;
+import com.mycv.model.entity.CvEntity;
 import com.mycv.model.request.NewCv;
 import com.mycv.service.CvService;
 import lombok.extern.slf4j.Slf4j;
@@ -44,8 +45,8 @@ public class CvController {
         log.info("Initiating|createCv");
         log.info("ReqBody|{}", newCv.toString());
         try {
-            this.cvService.createNewCv(newCv);
-            Response response = Response.success("CV has successfully created as a draft").build(ResponseType.OPERATION_SUCCESS);
+            CvEntity entity = this.cvService.createNewCv(newCv);
+            Response response = Response.success(entity).build(ResponseType.OPERATION_SUCCESS);
             log.info("Res|{}", response.toString());
             return ResponseEntity.ok(response);
         } finally {

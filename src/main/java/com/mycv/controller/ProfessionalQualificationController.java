@@ -3,6 +3,7 @@ package com.mycv.controller;
 import com.mycv.exception.ResponseType;
 import com.mycv.model.Response;
 import com.mycv.model.UserRoles;
+import com.mycv.model.entity.ProfessionalQualificationEntity;
 import com.mycv.model.request.EduEntryRequest;
 import com.mycv.model.request.ProQualRequest;
 import com.mycv.model.request.ProfQualUpdateRequest;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @Slf4j
@@ -44,8 +46,8 @@ public class ProfessionalQualificationController {
         log.info("Initiating|createProQual");
         log.info("ReqBody|{}", request.toString());
         try {
-            this.qualificationService.create(request);
-            Response response = Response.success("Professional qualification has successfully added")
+            List<ProfessionalQualificationEntity> professionalQualificationEntities = this.qualificationService.create(request);
+            Response response = Response.success(professionalQualificationEntities)
                     .build(ResponseType.OPERATION_SUCCESS);
             log.info("Res|{}", response.toString());
             return ResponseEntity.ok(response);

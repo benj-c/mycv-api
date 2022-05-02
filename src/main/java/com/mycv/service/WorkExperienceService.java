@@ -14,6 +14,7 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -32,7 +33,7 @@ public class WorkExperienceService {
         this.cvRepository = cvRepository;
     }
 
-    public void create(WorkExpRequest request) {
+    public List<WorkExperienceEntity> create(WorkExpRequest request) {
         //check if user has a cv
         String user = ApiUtil.getAuthUserName();
         log.info("retrieving cv by user|user:{}", user);
@@ -56,6 +57,7 @@ public class WorkExperienceService {
         entity.setCurrentJob(request.getEndDate() == null);
 
         getWorkExperienceRepository().save(entity);
+        return getWorkExperienceRepository().findByUser(user);
     }
 
     public void update(WorkExpUpdateRequest request) {

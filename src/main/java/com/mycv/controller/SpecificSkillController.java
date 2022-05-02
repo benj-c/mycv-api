@@ -3,7 +3,7 @@ package com.mycv.controller;
 import com.mycv.exception.ResponseType;
 import com.mycv.model.Response;
 import com.mycv.model.UserRoles;
-import com.mycv.model.request.ProfQualUpdateRequest;
+import com.mycv.model.entity.SpecificSkilEntity;
 import com.mycv.model.request.SpecificSkilRequest;
 import com.mycv.model.request.SpecificSkilUpdateRequest;
 import com.mycv.service.SpecificSkillService;
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @Slf4j
@@ -46,8 +47,8 @@ public class SpecificSkillController {
         log.info("Initiating|createSpecificSkill");
         log.info("ReqBody|{}", request.toString());
         try {
-            this.specificSkillService.create(request);
-            Response response = Response.success("specific skill has successfully added")
+            List<SpecificSkilEntity> specificSkilEntities = this.specificSkillService.create(request);
+            Response response = Response.success(specificSkilEntities)
                     .build(ResponseType.OPERATION_SUCCESS);
             log.info("Res|{}", response.toString());
             return ResponseEntity.ok(response);

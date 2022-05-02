@@ -1,5 +1,7 @@
 package com.mycv.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.time.LocalDate;
@@ -41,18 +43,30 @@ public class CvEntity {
     @Basic
     @Column(name = "contact_number", nullable = false, length = 15)
     private String contactNumber;
+
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private UserEntity userByUserId;
+
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "job_field_id", referencedColumnName = "id")
     private CvJobFieldEntity cvJobFieldByJobFieldId;
+
+    @JsonIgnore
     @OneToMany(mappedBy = "cvByCvId")
     private Collection<EducationHistoryEntity> educationHistoriesById;
+
+    @JsonIgnore
     @OneToMany(mappedBy = "cvByCvId")
     private Collection<ProfessionalQualificationEntity> professionalQualificationsById;
+
+    @JsonIgnore
     @OneToMany(mappedBy = "cvByCvId")
     private Collection<SpecificSkilEntity> specificSkilsById;
+
+    @JsonIgnore
     @OneToMany(mappedBy = "cvByCvId")
     private Collection<WorkExperienceEntity> workExperiencesById;
 

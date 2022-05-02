@@ -1,5 +1,7 @@
 package com.mycv.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -19,6 +21,7 @@ public class SpecificSkilEntity {
     @Basic
     @Column(name = "field", nullable = false, length = 255)
     private String field;
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "cv_id", referencedColumnName = "id", nullable = false)
     private CvEntity cvByCvId;
