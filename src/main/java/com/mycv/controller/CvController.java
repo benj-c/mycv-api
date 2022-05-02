@@ -135,4 +135,35 @@ public class CvController {
             log.info("Completed|deleteCv|ProcessingTime:{}ms", System.currentTimeMillis() - startTime);
         }
     }
+
+    /**
+     * creates new CV
+     *
+     * @param newCv
+     * @return
+     */
+    @PostMapping(
+            path = "/cv/{cvId}/submit",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @RolesAllowed(UserRoles.JOB_SEEKER)
+    public ResponseEntity<Response> submitCv(
+            @RequestParam("isDraft") boolean isDraft,
+            @PathVariable("cvId") int cvId
+    ) {
+        long startTime = System.currentTimeMillis();
+        log.info("Initiating|submitCv");
+        log.info("ReqParam|isDraft:{}", isDraft);
+        log.info("PathVar|cvId:{}", cvId);
+        try {
+            this.cvService.submit(cvId, isDraft);
+            Response response = Response.success("CV has successfully " + (isDraft ? "saved as draft" : "submitted"))
+                    .build(ResponseType.OPERATION_SUCCESS);
+            log.info("Res|{}", response.toString());
+            return ResponseEntity.ok(response);
+        } finally {
+            log.info("Completed|submitCv|ProcessingTime:{}ms", System.currentTimeMillis() - startTime);
+        }
+    }
+
 }

@@ -208,4 +208,15 @@ public class CvService {
 
         getCvRepository().save(entity);
     }
+
+    public void submit(int cvId, boolean isDraft) {
+        String user = ApiUtil.getAuthUserName();
+        CvEntity entity = getCvRepository().findByUserNameAndCvId(user, cvId).<ApiException>orElseThrow(() -> {
+            log.error("there's no cv to update");
+            throw new ApiException(ResponseType.WORK_EXPERIENCE_NOT_FOUND, "there's no cv to update");
+        });
+
+        entity.setDraft(isDraft);
+        getCvRepository().save(entity);
+    }
 }
