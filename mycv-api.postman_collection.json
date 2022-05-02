@@ -277,7 +277,7 @@
 					"response": []
 				},
 				{
-					"name": "New Request",
+					"name": "update",
 					"request": {
 						"auth": {
 							"type": "bearer",
@@ -289,11 +289,11 @@
 								}
 							]
 						},
-						"method": "PATCH",
+						"method": "PUT",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"summery\": \"sc summery updated\"\r\n}",
+							"raw": "{\r\n    \"id\": 1,\r\n    \"summery\": \"xxxx\",\r\n    \"firstName\": \"xxxx\",\r\n    \"surname\": \"xxxx\",\r\n    \"country\": \"sri lanka\",\r\n    \"city\": \"xxxx\",\r\n    \"email\": \"xxxx@asdasd.com\",\r\n    \"contactNumber\": \"xxxx\",\r\n    \"jobFieldId\": 1\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -301,7 +301,52 @@
 							}
 						},
 						"url": {
-							"raw": ""
+							"raw": "localhost:8401/api/cv",
+							"host": [
+								"localhost"
+							],
+							"port": "8401",
+							"path": [
+								"api",
+								"cv"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "submit",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{api_key}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "localhost:8401/api/cv/4/submit?isDraft=false",
+							"host": [
+								"localhost"
+							],
+							"port": "8401",
+							"path": [
+								"api",
+								"cv",
+								"4",
+								"submit"
+							],
+							"query": [
+								{
+									"key": "isDraft",
+									"value": "false"
+								}
+							]
 						}
 					},
 					"response": []
@@ -328,7 +373,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\": \"title_x\",\r\n    \"institutionName\": \"esoft\",\r\n    \"location\": \"colombo\",\r\n    \"startDate\": \"2015-10-10\",\r\n    \"endDate\": \"2017-10-10\",\r\n    \"eduFieldId\": 1,\r\n    \"degreeLevelId\": 5\r\n}\r\n",
+							"raw": "{\r\n    \"title\": \"title_x\",\r\n    \"institutionName\": \"esoft\",\r\n    \"location\": \"colombo\",\r\n    \"startDate\": \"2015-10-10\",\r\n    \"endDate\": \"2017-10-\",\r\n    \"eduFieldId\": 1,\r\n    \"degreeLevelId\": 5\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
