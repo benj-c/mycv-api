@@ -3,6 +3,7 @@ package com.mycv.service;
 import com.mycv.exception.ApiException;
 import com.mycv.exception.ResponseType;
 import com.mycv.model.CvData;
+import com.mycv.model.UserRoles;
 import com.mycv.model.entity.CvEntity;
 import com.mycv.model.entity.CvJobFieldEntity;
 import com.mycv.model.entity.UserEntity;
@@ -69,11 +70,20 @@ public class CvService {
     }
 
     public CvData findCv(int cvId) {
-        String authUser = ApiUtil.getAuthUserName();
-        log.info("getting CV by username:{}, cvId:{}", authUser, cvId);
-        CvEntity cvEntity = getCvRepository().findByUserNameAndCvId(authUser, cvId).orElseThrow(() ->
-                new ApiException(ResponseType.CV_NOT_FOUND, "CV not found for id: " + cvId)
-        );
+        String role = ApiUtil.getAuthentication().getAuthorities().stream().findFirst().get().getAuthority();
+        CvEntity cvEntity = null;
+        if (UserRoles.JOB_SEEKER.equals(role)) {
+            String authUser = ApiUtil.getAuthUserName();
+            log.info("getting CV by username:{}, cvId:{}", authUser, cvId);
+            cvEntity = getCvRepository().findByUserNameAndCvId(authUser, cvId).orElseThrow(() ->
+                    new ApiException(ResponseType.CV_NOT_FOUND, "CV not found for id: " + cvId)
+            );
+        } else {
+            cvEntity = getCvRepository().findById(cvId).orElseThrow(() ->
+                    new ApiException(ResponseType.CV_NOT_FOUND, "CV not found for id: " + cvId)
+            );
+        }
+
         CvJobFieldEntity cvJobFieldEntity = cvEntity.getCvJobFieldByJobFieldId();
         CvData.CvJobField cvJobField = new CvData.CvJobField(cvJobFieldEntity.getId(), cvJobFieldEntity.getField());
 
