@@ -15,7 +15,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"john\",\r\n    \"password\": \"abc\"\r\n}",
+							"raw": "{\r\n    \"username\": \"demo_admin\",\r\n    \"password\": \"abc\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -345,6 +345,41 @@
 								{
 									"key": "isDraft",
 									"value": "false"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "search",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{api_key}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8401/api/search?q=eq:Bcs,jf:HR",
+							"host": [
+								"localhost"
+							],
+							"port": "8401",
+							"path": [
+								"api",
+								"search"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "eq:Bcs,jf:HR"
 								}
 							]
 						}
