@@ -57,6 +57,27 @@ public class WorkExperienceController {
         }
     }
 
+
+
+    @GetMapping(
+        path = "/work-experience",
+        produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @RolesAllowed(UserRoles.JOB_SEEKER)
+    public ResponseEntity<Response> getWorkExp() {
+        long startTime = System.currentTimeMillis();
+        log.info("Initiating|createWorkExp");
+        try {
+            List<WorkExperienceEntity> workExperienceEntities = this.workExperienceService.get();
+            Response response = Response.success(workExperienceEntities)
+                .build(ResponseType.OPERATION_SUCCESS);
+            log.info("Res|{}", response.toString());
+            return ResponseEntity.ok(response);
+        } finally {
+            log.info("Completed|createWorkExp|ProcessingTime:{}ms", System.currentTimeMillis() - startTime);
+        }
+    }
+
     /**
      * update work experience entry
      *
