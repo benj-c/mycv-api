@@ -2,10 +2,7 @@ package com.mycv.service;
 
 import com.mycv.exception.ApiException;
 import com.mycv.exception.ResponseType;
-import com.mycv.model.entity.CvEntity;
-import com.mycv.model.entity.DegreeLevelEntity;
-import com.mycv.model.entity.EducationHistoryEntity;
-import com.mycv.model.entity.EducationStudyFieldEntity;
+import com.mycv.model.entity.*;
 import com.mycv.model.request.EduEntryRequest;
 import com.mycv.model.request.EduEntryUpdateRequest;
 import com.mycv.repository.CvRepository;
@@ -122,5 +119,10 @@ public class EducationDetailService {
 
         log.info("deleting found entity");
         getEducationDetailRepository().delete(entity);
+    }
+
+    public List<EducationHistoryEntity> get(){
+        String user = ApiUtil.getAuthUserName();
+        return getEducationDetailRepository().findByUser(user);
     }
 }

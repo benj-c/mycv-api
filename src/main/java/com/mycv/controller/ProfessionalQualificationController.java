@@ -4,6 +4,7 @@ import com.mycv.exception.ResponseType;
 import com.mycv.model.Response;
 import com.mycv.model.UserRoles;
 import com.mycv.model.entity.ProfessionalQualificationEntity;
+import com.mycv.model.entity.SpecificSkilEntity;
 import com.mycv.model.request.EduEntryRequest;
 import com.mycv.model.request.ProQualRequest;
 import com.mycv.model.request.ProfQualUpdateRequest;
@@ -112,4 +113,28 @@ public class ProfessionalQualificationController {
             log.info("Completed|deleteProQual|ProcessingTime:{}ms", System.currentTimeMillis() - startTime);
         }
     }
+
+    /**
+     *
+     * @return
+     */
+    @GetMapping(
+            path = "/proqual",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @RolesAllowed(UserRoles.JOB_SEEKER)
+    public ResponseEntity<Response> getProQual() {
+        long startTime = System.currentTimeMillis();
+        log.info("Initiating|getProQual");
+        try {
+            List<ProfessionalQualificationEntity> workExperienceEntities = this.qualificationService.get();
+            Response response = Response.success(workExperienceEntities)
+                    .build(ResponseType.OPERATION_SUCCESS);
+            log.info("Res|{}", response.toString());
+            return ResponseEntity.ok(response);
+        } finally {
+            log.info("Completed|getProQual|ProcessingTime:{}ms", System.currentTimeMillis() - startTime);
+        }
+    }
+
 }

@@ -86,4 +86,9 @@ public class ProfessionalQualificationService {
         log.info("deleting found entity");
         getQualificationRepository().delete(entity);
     }
+
+    public List<ProfessionalQualificationEntity> get(){
+        String user = ApiUtil.getAuthUserName();
+        return getQualificationRepository().findByUser(user);
+    }
 }

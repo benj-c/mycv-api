@@ -4,6 +4,7 @@ import com.mycv.exception.ResponseType;
 import com.mycv.model.Response;
 import com.mycv.model.UserRoles;
 import com.mycv.model.entity.EducationHistoryEntity;
+import com.mycv.model.entity.ProfessionalQualificationEntity;
 import com.mycv.model.request.EduEntryRequest;
 import com.mycv.model.request.EduEntryUpdateRequest;
 import com.mycv.service.EducationDetailService;
@@ -111,4 +112,28 @@ public class EducationDetailController {
             log.info("Completed|deleteEduEntry|ProcessingTime:{}ms", System.currentTimeMillis() - startTime);
         }
     }
+
+    /**
+     *
+     * @return
+     */
+    @GetMapping(
+            path = "/education",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @RolesAllowed(UserRoles.JOB_SEEKER)
+    public ResponseEntity<Response> getEducations() {
+        long startTime = System.currentTimeMillis();
+        log.info("Initiating|getEducations");
+        try {
+            List<EducationHistoryEntity> workExperienceEntities = this.educationDetailService.get();
+            Response response = Response.success(workExperienceEntities)
+                    .build(ResponseType.OPERATION_SUCCESS);
+            log.info("Res|{}", response.toString());
+            return ResponseEntity.ok(response);
+        } finally {
+            log.info("Completed|getEducations|ProcessingTime:{}ms", System.currentTimeMillis() - startTime);
+        }
+    }
+
 }

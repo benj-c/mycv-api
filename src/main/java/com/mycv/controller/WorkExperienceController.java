@@ -68,7 +68,7 @@ public class WorkExperienceController {
     @RolesAllowed(UserRoles.JOB_SEEKER)
     public ResponseEntity<Response> getWorkExp() {
         long startTime = System.currentTimeMillis();
-        log.info("Initiating|createWorkExp");
+        log.info("Initiating|getWorkExp");
         try {
             List<WorkExperienceEntity> workExperienceEntities = this.workExperienceService.get();
             Response response = Response.success(workExperienceEntities)
@@ -76,7 +76,7 @@ public class WorkExperienceController {
             log.info("Res|{}", response.toString());
             return ResponseEntity.ok(response);
         } finally {
-            log.info("Completed|createWorkExp|ProcessingTime:{}ms", System.currentTimeMillis() - startTime);
+            log.info("Completed|getWorkExp|ProcessingTime:{}ms", System.currentTimeMillis() - startTime);
         }
     }
 

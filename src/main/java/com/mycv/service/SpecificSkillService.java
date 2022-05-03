@@ -86,4 +86,9 @@ public class SpecificSkillService {
         log.info("deleting found entity");
         getSpecificSkillRepository().delete(entity);
     }
+
+    public List<SpecificSkilEntity> get(){
+        String user = ApiUtil.getAuthUserName();
+        return getSpecificSkillRepository().findByUser(user);
+    }
 }

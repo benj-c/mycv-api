@@ -113,4 +113,28 @@ public class SpecificSkillController {
             log.info("Completed|deleteSpecificSkill|ProcessingTime:{}ms", System.currentTimeMillis() - startTime);
         }
     }
+
+    /**
+     *
+     * @return
+     */
+    @GetMapping(
+            path = "/specific-skill",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @RolesAllowed(UserRoles.JOB_SEEKER)
+    public ResponseEntity<Response> getSkills() {
+        long startTime = System.currentTimeMillis();
+        log.info("Initiating|getSkills");
+        try {
+            List<SpecificSkilEntity> workExperienceEntities = this.specificSkillService.get();
+            Response response = Response.success(workExperienceEntities)
+                    .build(ResponseType.OPERATION_SUCCESS);
+            log.info("Res|{}", response.toString());
+            return ResponseEntity.ok(response);
+        } finally {
+            log.info("Completed|getSkills|ProcessingTime:{}ms", System.currentTimeMillis() - startTime);
+        }
+    }
+
 }
