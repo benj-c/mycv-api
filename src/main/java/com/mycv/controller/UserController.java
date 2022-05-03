@@ -4,6 +4,8 @@ import com.mycv.exception.ResponseType;
 import com.mycv.model.AuthData;
 import com.mycv.model.Response;
 import com.mycv.model.UserRoles;
+import com.mycv.model.entity.EducationHistoryEntity;
+import com.mycv.model.entity.UserEntity;
 import com.mycv.model.request.UserCredentialsRequest;
 import com.mycv.service.UserService;
 import com.mycv.util.JwtUtil;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @Slf4j
@@ -147,6 +150,29 @@ public class UserController {
             return ResponseEntity.ok(response);
         } finally {
             log.info("Completed|createUser|ProcessingTime:{}ms", System.currentTimeMillis() - startTime);
+        }
+    }
+
+    /**
+     *
+     * @return
+     */
+    @GetMapping(
+            path = "/user",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @RolesAllowed(UserRoles.ADMIN)
+    public ResponseEntity<Response> getUsers() {
+        long startTime = System.currentTimeMillis();
+        log.info("Initiating|getUsers");
+        try {
+            List<UserEntity> allUsers = this.userService.getAllUsers();
+            Response response = Response.success(allUsers)
+                    .build(ResponseType.OPERATION_SUCCESS);
+            log.info("Res|{}", response.toString());
+            return ResponseEntity.ok(response);
+        } finally {
+            log.info("Completed|getUsers|ProcessingTime:{}ms", System.currentTimeMillis() - startTime);
         }
     }
 }

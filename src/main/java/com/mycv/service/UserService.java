@@ -19,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -137,5 +138,9 @@ public class UserService {
         userEntity.setUserRoleByUserRoleId(userRole);
 
         getUserRepository().save(userEntity);
+    }
+
+    public List<UserEntity> getAllUsers() {
+        return getUserRepository().findAll();
     }
 }

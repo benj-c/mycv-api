@@ -18,6 +18,7 @@ public class UserEntity {
     @Basic
     @Column(name = "user_name", nullable = false, length = 255)
     private String userName;
+    @JsonIgnore
     @Basic
     @Column(name = "password", nullable = false, length = 60)
     private String password;
@@ -33,7 +34,7 @@ public class UserEntity {
     @JsonIgnore
     @OneToMany(mappedBy = "userByUserId")
     private Collection<CvEntity> cvsById;
-    @JsonIgnore
+//    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "user_role_id", referencedColumnName = "id")
     private UserRoleEntity userRoleByUserRoleId;
