@@ -10,12 +10,24 @@
 			"item": [
 				{
 					"name": "authenticate",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const res = pm.response.json();\r",
+									"pm.collectionVariables.set(\"api_key\", res.data.token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"demo_admin\",\r\n    \"password\": \"abc\"\r\n}",
+							"raw": "{\r\n    \"username\": \"demo_agent\",\r\n    \"password\": \"abc\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -168,6 +180,35 @@
 								"api",
 								"user",
 								"create"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "all users",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{api_key}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8401/api/user",
+							"host": [
+								"localhost"
+							],
+							"port": "8401",
+							"path": [
+								"api",
+								"user"
 							]
 						}
 					},
@@ -381,6 +422,37 @@
 									"key": "q",
 									"value": "eq:Bcs,jf:HR"
 								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "download pdf",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{api_key}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:8401/api/cv/4/download",
+							"host": [
+								"localhost"
+							],
+							"port": "8401",
+							"path": [
+								"api",
+								"cv",
+								"4",
+								"download"
 							]
 						}
 					},

@@ -7,6 +7,7 @@ import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -56,19 +57,19 @@ public class CvEntity {
 
     @JsonIgnore
     @OneToMany(mappedBy = "cvByCvId")
-    private Collection<EducationHistoryEntity> educationHistoriesById;
+    private List<EducationHistoryEntity> educationHistoriesById;
 
     @JsonIgnore
     @OneToMany(mappedBy = "cvByCvId")
-    private Collection<ProfessionalQualificationEntity> professionalQualificationsById;
+    private List<ProfessionalQualificationEntity> professionalQualificationsById;
 
     @JsonIgnore
     @OneToMany(mappedBy = "cvByCvId")
-    private Collection<SpecificSkilEntity> specificSkilsById;
+    private List<SpecificSkilEntity> specificSkilsById;
 
     @JsonIgnore
     @OneToMany(mappedBy = "cvByCvId")
-    private Collection<WorkExperienceEntity> workExperiencesById;
+    private List<WorkExperienceEntity> workExperiencesById;
 
     public Integer getId() {
         return id;
@@ -179,35 +180,35 @@ public class CvEntity {
         this.cvJobFieldByJobFieldId = cvJobFieldByJobFieldId;
     }
 
-    public Collection<EducationHistoryEntity> getEducationHistoriesById() {
+    public List<EducationHistoryEntity> getEducationHistoriesById() {
         return educationHistoriesById;
     }
 
-    public void setEducationHistoriesById(Collection<EducationHistoryEntity> educationHistoriesById) {
+    public void setEducationHistoriesById(List<EducationHistoryEntity> educationHistoriesById) {
         this.educationHistoriesById = educationHistoriesById;
     }
 
-    public Collection<ProfessionalQualificationEntity> getProfessionalQualificationsById() {
+    public List<ProfessionalQualificationEntity> getProfessionalQualificationsById() {
         return professionalQualificationsById;
     }
 
-    public void setProfessionalQualificationsById(Collection<ProfessionalQualificationEntity> professionalQualificationsById) {
+    public void setProfessionalQualificationsById(List<ProfessionalQualificationEntity> professionalQualificationsById) {
         this.professionalQualificationsById = professionalQualificationsById;
     }
 
-    public Collection<SpecificSkilEntity> getSpecificSkilsById() {
+    public List<SpecificSkilEntity> getSpecificSkilsById() {
         return specificSkilsById;
     }
 
-    public void setSpecificSkilsById(Collection<SpecificSkilEntity> specificSkilsById) {
+    public void setSpecificSkilsById(List<SpecificSkilEntity> specificSkilsById) {
         this.specificSkilsById = specificSkilsById;
     }
 
-    public Collection<WorkExperienceEntity> getWorkExperiencesById() {
+    public List<WorkExperienceEntity> getWorkExperiencesById() {
         return workExperiencesById;
     }
 
-    public void setWorkExperiencesById(Collection<WorkExperienceEntity> workExperiencesById) {
+    public void setWorkExperiencesById(List<WorkExperienceEntity> workExperiencesById) {
         this.workExperiencesById = workExperiencesById;
     }
 }

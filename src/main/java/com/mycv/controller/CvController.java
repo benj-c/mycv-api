@@ -2,6 +2,7 @@ package com.mycv.controller;
 
 import com.mycv.exception.ResponseType;
 import com.mycv.model.CvData;
+import com.mycv.model.GeneratedDocxDocDetail;
 import com.mycv.model.Response;
 import com.mycv.model.UserRoles;
 import com.mycv.model.entity.CvEntity;
@@ -9,12 +10,16 @@ import com.mycv.model.request.CvUpdateRequest;
 import com.mycv.model.request.NewCv;
 import com.mycv.service.CvService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.Map;
 
 @RestController
@@ -163,6 +168,32 @@ public class CvController {
             return ResponseEntity.ok(response);
         } finally {
             log.info("Completed|submitCv|ProcessingTime:{}ms", System.currentTimeMillis() - startTime);
+        }
+    }
+
+    /**
+     * @param cvId
+     * @return
+     */
+    @GetMapping(
+            path = "/cv/{cvId}/download",
+            produces = MediaType.APPLICATION_OCTET_STREAM_VALUE
+    )
+    @RolesAllowed({UserRoles.AGENT})
+    public ResponseEntity<Resource> generateAndDownloadDocx(
+            @PathVariable int cvId
+    ) throws IOException {
+        long startTime = System.currentTimeMillis();
+        log.info("Initiating|generateAndDownloadDocx");
+        log.info("PathVars|{}", cvId);
+        try {
+            GeneratedDocxDocDetail data = this.cvService.createDocx(cvId);
+            log.info("Res|file");
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + data.getFileName() + "\"")
+                    .body(data.getResource());
+        } finally {
+            log.info("Completed|generateAndDownloadDocx|ProcessingTime:{}ms", System.currentTimeMillis() - startTime);
         }
     }
 

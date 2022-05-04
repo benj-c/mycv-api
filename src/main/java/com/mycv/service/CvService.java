@@ -3,21 +3,24 @@ package com.mycv.service;
 import com.mycv.exception.ApiException;
 import com.mycv.exception.ResponseType;
 import com.mycv.model.CvData;
+import com.mycv.model.GeneratedDocxDocDetail;
 import com.mycv.model.UserRoles;
 import com.mycv.model.entity.CvEntity;
 import com.mycv.model.entity.CvJobFieldEntity;
 import com.mycv.model.entity.UserEntity;
-import com.mycv.model.entity.WorkExperienceEntity;
 import com.mycv.model.request.CvUpdateRequest;
 import com.mycv.model.request.NewCv;
 import com.mycv.repository.CvRepository;
 import com.mycv.repository.UserRepository;
 import com.mycv.util.ApiUtil;
+import com.mycv.util.FileUtil;
 import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -228,5 +231,17 @@ public class CvService {
 
         entity.setDraft(isDraft);
         getCvRepository().save(entity);
+    }
+
+    public GeneratedDocxDocDetail createDocx(int cvId) throws IOException {
+        CvEntity cvData = getCvRepository().findById(cvId).orElseThrow(() ->
+                new ApiException(ResponseType.CV_NOT_FOUND, "CV not found for id: " + cvId)
+        );
+
+        ByteArrayResource resource = FileUtil.generatePdf(cvData);
+        return new GeneratedDocxDocDetail(
+                resource,
+                String.join("-", cvData.getFirstName(), cvData.getSurname(), String.valueOf(cvData.getId())) + ".pdf"
+        );
     }
 }
