@@ -74,13 +74,19 @@ public class CvService {
 
     public CvData findCv(int cvId) {
         String role = ApiUtil.getAuthentication().getAuthorities().stream().findFirst().get().getAuthority();
+        String authUser = ApiUtil.getAuthUserName();
         CvEntity cvEntity = null;
         if (UserRoles.JOB_SEEKER.equals(role)) {
-            String authUser = ApiUtil.getAuthUserName();
             log.info("getting CV by username:{}, cvId:{}", authUser, cvId);
-            cvEntity = getCvRepository().findByUserNameAndCvId(authUser, cvId).orElseThrow(() ->
-                    new ApiException(ResponseType.CV_NOT_FOUND, "CV not found for id: " + cvId)
-            );
+            if (cvId == -1) {
+                cvEntity = getCvRepository().findByUserName(authUser).orElseThrow(() ->
+                        new ApiException(ResponseType.CV_NOT_FOUND, "CV not found for user: " + authUser)
+                );
+            } else {
+                cvEntity = getCvRepository().findByUserNameAndCvId(authUser, cvId).orElseThrow(() ->
+                        new ApiException(ResponseType.CV_NOT_FOUND, "CV not found for id: " + cvId)
+                );
+            }
         } else {
             cvEntity = getCvRepository().findById(cvId).orElseThrow(() ->
                     new ApiException(ResponseType.CV_NOT_FOUND, "CV not found for id: " + cvId)

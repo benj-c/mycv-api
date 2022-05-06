@@ -97,7 +97,7 @@ public class CvController {
             path = "/cv/{cvId}",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    @RolesAllowed({UserRoles.JOB_SEEKER, UserRoles.AGENT, UserRoles.ADMIN})
+    @RolesAllowed({UserRoles.JOB_SEEKER, UserRoles.AGENT})
     public ResponseEntity<Response> retrieveCv(
             @PathVariable int cvId
     ) {
