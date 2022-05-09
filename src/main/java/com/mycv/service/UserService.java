@@ -57,6 +57,7 @@ public class UserService {
                 userEntity.getUserRoleByUserRoleId().getType()
         );
         return AuthData.builder()
+                .id(userEntity.getId())
                 .createdDate(userEntity.getCreatedDate())
                 .username(userEntity.getUserName())
                 .isAvtive(userEntity.getActive())

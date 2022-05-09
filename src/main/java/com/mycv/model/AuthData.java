@@ -12,6 +12,7 @@ import java.time.LocalDate;
 @ToString
 @Builder
 public class AuthData {
+    private int id;
     private String username;
     private String email;
     private LocalDate createdDate;
