@@ -4,6 +4,7 @@ import com.mycv.exception.ApiException;
 import com.mycv.exception.ResponseType;
 import com.mycv.model.AuthData;
 import com.mycv.model.UserRoles;
+import com.mycv.model.entity.EducationHistoryEntity;
 import com.mycv.model.entity.UserEntity;
 import com.mycv.model.entity.UserRoleEntity;
 import com.mycv.model.request.UserCredentialsRequest;
@@ -142,5 +143,11 @@ public class UserService {
 
     public List<UserEntity> getAllUsers() {
         return getUserRepository().findAll();
+    }
+
+    public void delete(int id) {
+        UserEntity userRole = getUserRepository().findById(id)
+                .orElseThrow(() -> new ApiException(ResponseType.USER_NOT_FOUND, null));
+        getUserRepository().delete(userRole);
     }
 }

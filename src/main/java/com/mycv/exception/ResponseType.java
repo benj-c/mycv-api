@@ -24,7 +24,8 @@ public enum ResponseType {
     USER_ROLE_NOT_FOUND(1013, "user role could not find", HttpStatus.BAD_REQUEST),
     PROF_QUAL_NOT_FOUND(1014, "professional qualification could not find", HttpStatus.BAD_REQUEST),
     SPECIFIC_SKILL_NOT_FOUND(1015, "specific skill could not find", HttpStatus.BAD_REQUEST),
-    WORK_EXPERIENCE_NOT_FOUND(1016, "work experience could not find", HttpStatus.BAD_REQUEST)
+    WORK_EXPERIENCE_NOT_FOUND(1016, "work experience could not find", HttpStatus.BAD_REQUEST),
+    WORK_NOT_FOUND(1016, "user could not find", HttpStatus.BAD_REQUEST)
     ;
 
     private int code;

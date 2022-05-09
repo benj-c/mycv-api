@@ -175,4 +175,32 @@ public class UserController {
             log.info("Completed|getUsers|ProcessingTime:{}ms", System.currentTimeMillis() - startTime);
         }
     }
+
+    /**
+     *
+     * @param id
+     * @return
+     */
+    @DeleteMapping(
+            path = "/user/{id}",
+            produces = MediaType.APPLICATION_JSON_VALUE
+    )
+    @RolesAllowed(UserRoles.JOB_SEEKER)
+    public ResponseEntity<Response> deleteUser(
+            @PathVariable int id
+    ) {
+        long startTime = System.currentTimeMillis();
+        log.info("Initiating|deleteUser");
+        log.info("PathVars|id:{}", id);
+        try {
+            this.userService.delete(id);
+            Response response = Response.success("User has successfully deleted")
+                    .build(ResponseType.OPERATION_SUCCESS);
+            log.info("Res|{}", response.toString());
+            return ResponseEntity.ok(response);
+        } finally {
+            log.info("Completed|deleteUser|ProcessingTime:{}ms", System.currentTimeMillis() - startTime);
+        }
+    }
+
 }

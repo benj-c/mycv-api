@@ -175,7 +175,7 @@ public class CvController {
             path = "/cv/{cvId}/download",
             produces = MediaType.APPLICATION_OCTET_STREAM_VALUE
     )
-    @RolesAllowed({UserRoles.AGENT})
+//    @RolesAllowed({UserRoles.AGENT})
     public ResponseEntity<Resource> generateAndDownloadDocx(
             @PathVariable int cvId
     ) throws IOException {
