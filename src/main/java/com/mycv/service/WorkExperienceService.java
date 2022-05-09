@@ -33,7 +33,7 @@ public class WorkExperienceService {
         this.cvRepository = cvRepository;
     }
 
-    public List<WorkExperienceEntity> create(WorkExpRequest request) {
+    public void create(WorkExpRequest request) {
         //check if user has a cv
         String user = ApiUtil.getAuthUserName();
         log.info("retrieving cv by user|user:{}", user);
@@ -57,7 +57,6 @@ public class WorkExperienceService {
         entity.setCurrentJob(request.getEndDate() == null);
 
         getWorkExperienceRepository().save(entity);
-        return getWorkExperienceRepository().findByUser(user);
     }
 
     public void update(WorkExpUpdateRequest request) {

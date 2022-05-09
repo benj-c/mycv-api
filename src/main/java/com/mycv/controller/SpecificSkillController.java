@@ -47,8 +47,8 @@ public class SpecificSkillController {
         log.info("Initiating|createSpecificSkill");
         log.info("ReqBody|{}", request.toString());
         try {
-            List<SpecificSkilEntity> specificSkilEntities = this.specificSkillService.create(request);
-            Response response = Response.success(specificSkilEntities)
+            this.specificSkillService.create(request);
+            Response response = Response.success("success")
                     .build(ResponseType.OPERATION_SUCCESS);
             log.info("Res|{}", response.toString());
             return ResponseEntity.ok(response);

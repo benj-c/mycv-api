@@ -1,7 +1,8 @@
 package com.mycv.model.request;
 
-import lombok.Data;
-import lombok.ToString;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.*;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -11,6 +12,9 @@ import java.time.LocalDateTime;
 
 @Data
 @ToString
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class NewCv {
 
     private String summery;
@@ -37,4 +41,7 @@ public class NewCv {
     @Max(value = Integer.MAX_VALUE, message = "please select a valid job field")
     private int job_field_id;
 
+    public String toJsonString() throws JsonProcessingException {
+        return new ObjectMapper().writeValueAsString(this);
+    }
 }

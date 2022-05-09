@@ -44,7 +44,7 @@ public class CvService {
      * @param newCv
      */
     @Transactional
-    public CvEntity createNewCv(NewCv newCv) {
+    public void createNewCv(NewCv newCv) {
         String authUser = ApiUtil.getAuthUserName();
         log.info("getting user by authenticated username");
         UserEntity userEntity = getUserRepository().findByUserName(authUser).orElseThrow(() ->
@@ -69,7 +69,7 @@ public class CvService {
         cvEntity.setCvJobFieldByJobFieldId(cvJobFieldEntity);
 
         log.info("saving CvEntity");
-        return getCvRepository().save(cvEntity);
+        getCvRepository().save(cvEntity);
     }
 
     public CvData findCv(int cvId) {

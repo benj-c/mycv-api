@@ -5,7 +5,6 @@ import com.mycv.model.CvData;
 import com.mycv.model.GeneratedDocxDocDetail;
 import com.mycv.model.Response;
 import com.mycv.model.UserRoles;
-import com.mycv.model.entity.CvEntity;
 import com.mycv.model.request.CvUpdateRequest;
 import com.mycv.model.request.NewCv;
 import com.mycv.service.CvService;
@@ -18,9 +17,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.security.RolesAllowed;
 import javax.validation.Valid;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.Map;
 
 @RestController
 @Slf4j
@@ -51,8 +48,8 @@ public class CvController {
         log.info("Initiating|createCv");
         log.info("ReqBody|{}", newCv.toString());
         try {
-            CvEntity entity = this.cvService.createNewCv(newCv);
-            Response response = Response.success(entity).build(ResponseType.OPERATION_SUCCESS);
+            this.cvService.createNewCv(newCv);
+            Response response = Response.success("success").build(ResponseType.OPERATION_SUCCESS);
             log.info("Res|{}", response.toString());
             return ResponseEntity.ok(response);
         } finally {
@@ -63,7 +60,6 @@ public class CvController {
     /**
      * updates new CV
      *
-     * @param newCv
      * @return
      */
     @PutMapping(

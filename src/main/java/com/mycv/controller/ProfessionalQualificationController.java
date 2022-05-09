@@ -47,8 +47,8 @@ public class ProfessionalQualificationController {
         log.info("Initiating|createProQual");
         log.info("ReqBody|{}", request.toString());
         try {
-            List<ProfessionalQualificationEntity> professionalQualificationEntities = this.qualificationService.create(request);
-            Response response = Response.success(professionalQualificationEntities)
+            this.qualificationService.create(request);
+            Response response = Response.success("success")
                     .build(ResponseType.OPERATION_SUCCESS);
             log.info("Res|{}", response.toString());
             return ResponseEntity.ok(response);

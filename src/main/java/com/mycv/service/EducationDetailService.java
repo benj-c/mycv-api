@@ -31,7 +31,7 @@ public class EducationDetailService {
         this.cvRepository = cvRepository;
     }
 
-    public List<EducationHistoryEntity> create(EduEntryRequest eduEntryRequest) {
+    public void create(EduEntryRequest eduEntryRequest) {
         //check if user has access to the cv id
         String user = ApiUtil.getAuthUserName();
         log.info("retrieving cv by user|user:{}", user);
@@ -65,7 +65,6 @@ public class EducationDetailService {
 
         log.info("saving entity");
         getEducationDetailRepository().save(entity);
-        return getEducationDetailRepository().findByUser(user);
     }
 
     public void update(EduEntryUpdateRequest request) {

@@ -47,8 +47,8 @@ public class WorkExperienceController {
         log.info("Initiating|createWorkExp");
         log.info("ReqBody|{}", request.toString());
         try {
-            List<WorkExperienceEntity> workExperienceEntities = this.workExperienceService.create(request);
-            Response response = Response.success(workExperienceEntities)
+            this.workExperienceService.create(request);
+            Response response = Response.success("success")
                     .build(ResponseType.OPERATION_SUCCESS);
             log.info("Res|{}", response.toString());
             return ResponseEntity.ok(response);

@@ -46,8 +46,8 @@ public class EducationDetailController {
         log.info("Initiating|createEduEntry");
         log.info("ReqBody|{}", eduEntryRequest.toString());
         try {
-            List<EducationHistoryEntity> educationHistoryEntities = this.educationDetailService.create(eduEntryRequest);
-            Response response = Response.success(educationHistoryEntities)
+            this.educationDetailService.create(eduEntryRequest);
+            Response response = Response.success("success")
                     .build(ResponseType.OPERATION_SUCCESS);
             log.info("Res|{}", response.toString());
             return ResponseEntity.ok(response);

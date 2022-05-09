@@ -32,7 +32,7 @@ public class ProfessionalQualificationService {
         this.cvRepository = cvRepository;
     }
 
-    public List<ProfessionalQualificationEntity> create(ProQualRequest request) {
+    public void create(ProQualRequest request) {
         //check if user has access to the cv id
         String user = ApiUtil.getAuthUserName();
         log.info("retrieving cv by user|user:{}", user);
@@ -51,7 +51,6 @@ public class ProfessionalQualificationService {
         entity.setCvByCvId(cvEntity);
 
         getQualificationRepository().save(entity);
-        return getQualificationRepository().findByUser(user);
     }
 
     public void update(ProfQualUpdateRequest request) {

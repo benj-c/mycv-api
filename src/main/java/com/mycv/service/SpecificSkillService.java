@@ -32,7 +32,7 @@ public class SpecificSkillService {
         this.cvRepository = cvRepository;
     }
 
-    public List<SpecificSkilEntity> create(SpecificSkilRequest request) {
+    public void create(SpecificSkilRequest request) {
         //check if user has a cv
         String user = ApiUtil.getAuthUserName();
         log.info("retrieving cv by user|user:{}", user);
@@ -51,7 +51,6 @@ public class SpecificSkillService {
         entity.setCvByCvId(cvEntity);
 
         getSpecificSkillRepository().save(entity);
-        return getSpecificSkillRepository().findByUser(user);
     }
 
     public void update(SpecificSkilUpdateRequest request) {
