@@ -31,7 +31,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/v3/**",
             "/user/register",
             "/actuator/**",
-            "/cv/*/download"
+            "/cv/*/download",
+            "/user/*/delete"
     };
 
     @Autowired

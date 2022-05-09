@@ -182,10 +182,10 @@ public class UserController {
      * @return
      */
     @DeleteMapping(
-            path = "/user/{id}",
+            path = "/user/{id}/delete",
             produces = MediaType.APPLICATION_JSON_VALUE
     )
-    @RolesAllowed(UserRoles.JOB_SEEKER)
+//    @RolesAllowed(UserRoles.JOB_SEEKER)
     public ResponseEntity<Response> deleteUser(
             @PathVariable int id
     ) {
