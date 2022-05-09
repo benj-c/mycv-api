@@ -27,7 +27,7 @@ public class CvDataSpecifications {
 
     public static Specification<CvEntity> withDegreeLevel(int f) {
         return (root, query, criteriaBuilder) -> criteriaBuilder.equal(
-                root.join("educationHistoriesById").join("degreeLevelByDegreeLevelId").get("level"), f
+                root.join("educationHistoriesById").join("degreeLevelByDegreeLevelId").get("id"), f
         );
     }
 

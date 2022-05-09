@@ -30,6 +30,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/swagger-ui*/**",
             "/v3/**",
             "/user/register"
+            ,"/cv/*/download"
     };
 
     @Autowired
