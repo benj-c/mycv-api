@@ -1,30 +1,18 @@
 package com.mycv.service;
 
-import com.mycv.controller.CommonDataController;
 import com.mycv.exception.ApiException;
-import org.assertj.core.api.Assertions;
+import com.mycv.model.entity.EducationHistoryEntity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.util.Assert;
-import org.springframework.web.context.WebApplicationContext;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
 import static org.mockito.Mockito.*;
-
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest(classes = EducationDetailService.class)
 class EducationDetailServiceTest {
@@ -34,37 +22,35 @@ class EducationDetailServiceTest {
 
     private MockMvc mockMvc;
 
-    @BeforeEach
-    void setup() {
+    @Test
+    void should_throw_error_when_create_if_cv_NotFound() {
+        doThrow(ApiException.class).when(educationDetailService).create(any());
+        assertThrows(ApiException.class, () -> educationDetailService.create(any()));
     }
 
     @Test
-    void should_return_error_if_cv_NotFound() {
-
-        try {
-            doThrow(ApiException.class).when(educationDetailService).create(any());
-        } catch (ApiException e) {
-//            Ass
-        }
+    void should_create_if_valid_cv() {
+        doNothing().when(educationDetailService).create(any());
+        assertDoesNotThrow(() -> educationDetailService.create(any()));
     }
 
     @Test
-    void update() {
+    void should_throw_error_if_id_notFound() {
+        assertDoesNotThrow(() -> educationDetailService.delete(1));
     }
 
     @Test
-    void delete() {
+    void should_delete_if_valid_id() {
+        assertDoesNotThrow(() -> educationDetailService.delete(anyInt()));
     }
 
     @Test
-    void get() {
+    void should_return_list_if_data_exists() {
+        List<EducationHistoryEntity> list = new ArrayList<>();
+        list.add(new EducationHistoryEntity());
+
+        when(educationDetailService.get()).thenReturn(list);
+        assertEquals(list.size(), 1);
     }
 
-    @Test
-    void getEducationDetailRepository() {
-    }
-
-    @Test
-    void getCvRepository() {
-    }
 }
