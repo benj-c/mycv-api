@@ -8,7 +8,7 @@ import org.springframework.http.HttpStatus;
 @Getter
 public enum ResponseType {
 
-    USER_NOT_FOUND(1000, "user not found", HttpStatus.NOT_FOUND),
+    USER_NOT_FOUND(1000, "user not found", HttpStatus.BAD_REQUEST),
     INTERNAL_SERVER_ERROR(1001, "internal server error", HttpStatus.INTERNAL_SERVER_ERROR),
     OPERATION_SUCCESS(1002, "success", HttpStatus.OK),
     JWT_ERROR(1003, "access token error", HttpStatus.FORBIDDEN),
@@ -25,7 +25,7 @@ public enum ResponseType {
     PROF_QUAL_NOT_FOUND(1014, "professional qualification could not find", HttpStatus.BAD_REQUEST),
     SPECIFIC_SKILL_NOT_FOUND(1015, "specific skill could not find", HttpStatus.BAD_REQUEST),
     WORK_EXPERIENCE_NOT_FOUND(1016, "work experience could not find", HttpStatus.BAD_REQUEST),
-    WORK_NOT_FOUND(1016, "user could not find", HttpStatus.BAD_REQUEST)
+    WORK_NOT_FOUND(1017, "user could not find", HttpStatus.BAD_REQUEST)
     ;
 
     private int code;
